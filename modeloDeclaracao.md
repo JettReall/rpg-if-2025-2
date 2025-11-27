@@ -14,12 +14,12 @@ typedef struct {
      int VarInteira;
      float VarFloat;
      char[VALOR];
-} NOMEPADRAO //declaração de struct é bom ser junto, mas se separar o nome tem problema não
+} NOMEPADRAO //declaração de struct é bom ser junto, tipo NOMEPADRAO DeckDoPlayer;
 
 int Array[LIMITE];
-int MatrizInformativa[LINHAS][COLUNAS] //pode usar numeros fixos também, no lugar de defines, sem problemas. Recomendo só quando esse mesmo número se repetir demais, seja em outras declarações ou por precisarmos fazer checagens, tipo 
+int MatrizInformativa[LINHAS][COLUNAS] //pode usar numeros fixos também, no lugar de defines, sem problemas, caso esse numero só seja usado pra isso
 int *Ponteiro;
-var *CoisaPtr; //Coloque no nome da variável do ponteiro, seja no final ou no começo
+var *CoisaPtr; //Coloque no nome da variável o "Ptr", seja no final ou no começo
 
 int FuncaoParaAlgo(int Var);
 
