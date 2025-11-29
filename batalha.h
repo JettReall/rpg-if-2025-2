@@ -24,6 +24,12 @@ enum Stats{
 
 typedef struct {
     char nome[50];
+    int tipo,valor,stat,contador;
+}efeito;
+
+
+typedef struct {
+    char nome[50];
     int stat[7];
     int hpatual,xp;
     nobaralho *baralho;
