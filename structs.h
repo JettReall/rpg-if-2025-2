@@ -1,9 +1,39 @@
+//enuns:
+enum Stats{
+    HPMAX,
+    DEFFIS,
+    DEFMAG,
+    SPEED,
+    ATQFIS,
+    ATQMAG,
+    NIVEL
+};
+
+
+typedef enum{
+    ATAQUEFIS,
+    ATAQUEMAG,
+    CURA,
+}Tipo;
+
+
+enum efeitotipos{
+    DANO,
+    STATMOD
+};
+
+
+
+//-------------------------------------------------------------------------------------------------------------------
+//structs:
+
+typedef struct personagem personagem;
+
 typedef struct {
     char nome[50];
     char descricao[200];
-    int hpatual,hpmax,deffis,defmag,speed,atqfis,atqmag; //status
-    int custo;
-    int habilidade(personagem player);
+    int stat[7]; //status
+    int custo; //dinheiro
 }item;
 
 typedef struct{
@@ -12,46 +42,27 @@ typedef struct{
     int tipo,valor;
 }carta;
 
-typedef struct {
+typedef struct {  //efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
     char nome[50];
     int tipo,valor,stat,contador;
 }efeito;
 
-typedef struct{
-    carta c;
+typedef struct{ //baralho eh uma lista encadeada
+    carta c;    //carta eh um struct carta
     nobaralho *prox;
 }nobaralho;
 
-enum Stats{
-    hpmax,
-    deffis,
-    defmag,
-    speed,
-    atqfis,
-    atqmag,
-    nivel
-};
-
-enum Stats{
-    hpmax,
-    deffis,
-    defmag,
-    speed,
-    atqfis,
-    atqmag,
-    nivel
-};
-
 typedef struct {
-    char nome[50];
-    int stat[7];
-    int hpatual,xp;
-    nobaralho *baralho;
-    item equipamentos[2]; //equipados
-    item inventario[6];
-    int coordenada[2];
+    char nome[50];//nome
+    int stat[7];//stats max
+    int hpatual,xp;//hp atual e xp atual
+    nobaralho *baralho; //baralho lista encadeada
+    carta cartas[200]; //todes as cartas do baralho total
+    item equipados[2]; //equipados:: quantidade ainda a decidir
+    item inventario[6];//itens guardados quantidade ainda a decidir
+    int coordenada[2];//coordenada no mapa da dungeon
     int savepoint; //numero do ultimo checkpoint
-    efeito efeitos[10];
+    efeito efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
 }personagem;
 
 typedef struct{
@@ -61,6 +72,6 @@ typedef struct{
 
 typedef struct{
     char nome[50];
-    int acessos[10];
-    personagem inimigos[10];
+    int acessos[10];//possibilidades de caminhos q o player pode ir
+    personagem inimigos[4];//inimigos presentes no quarto
 }localDungeon;
