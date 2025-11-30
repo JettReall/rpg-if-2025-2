@@ -3,7 +3,7 @@
 #include "structs.h"
 
 // Declara o array global
-extern personagem inimigo[22];
+extern PERSONAGEM inimigo[22];
 // Declara a função que preenche os inimigos
 void criarinimigos();
 
