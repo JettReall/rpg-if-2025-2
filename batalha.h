@@ -1,3 +1,5 @@
+#include "structs.h"
+
 #define MAX_TAM_DECK_PLAYER 30
 #define MAX_CARTAS_EM_MAO 5
 
@@ -22,23 +24,6 @@ enum Stats{
     nivel
 };
 
-typedef struct {
-    char nome[50];
-    int tipo,valor,stat,contador;
-}efeito;
-
-
-typedef struct {
-    char nome[50];
-    int stat[7];
-    int hpatual,xp;
-    nobaralho *baralho;
-    item equipamentos[2]; //equipados
-    item inventario[6];
-    int coordenada[2];
-    int savepoint; //numero do ultimo checkpoint
-    efeito efeitos[10];
-}personagem;
 
 CARTA DeckDoPlayer[MAX_TAM_DECK_PLAYER];
 CARTA *CartaPtr = NULL;
