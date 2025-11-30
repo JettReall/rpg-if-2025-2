@@ -7,29 +7,17 @@ CARTA *CartaPtr = NULL;
 CARTA MaoDoPlayer[MAX_CARTAS_EM_MAO];
 
 
-void PreencherBaralho(CARTA *Deck);
-void PreencherMao(CARTA *Mao, CARTA *Deck);
-
-
-
-
-
-
 //funcaos de efeitos overtime
-void aplicaEfeito(efeito efeito,personagem *personagem);
-void causaEfeito(personagem *player);
-void funcaoefeito(personagem *player,personagem *inimigo[],int qtdinimigos);
+void AplicaEfeito(EFEITO Efeito,PERSONAGEM *Personagem);
+void CausaEfeito(PERSONAGEM *Player);
+void FuncaoEfeito(PERSONAGEM *Player,PERSONAGEM *Inimigo[],int QtdInimigos);
 //funcaos de efeitos overtime
-
-
-
-
 
 
 //funcoes de calculo de dano
-int comboflat(carta carta[3]);
-float comboporcento(carta carta[3]);
-int decidetipo(carta carta[3]);
-void causardano(int danofis,int danomag,int cura,personagem *atacante,personagem *defensor);
-void dano(carta carta[3],personagem *atacante,personagem *defensor);
+int ComboFlat(CARTA Carta[3]);
+float ComboPorcento(CARTA Carta[3]);
+int DecideTipo(CARTA Carta[3]);
+void CausarDano(int DanoFis,int DanoMag,int Cura,PERSONAGEM *Atacante,PERSONAGEM *Defensor);
+void Dano(CARTA Carta[3],PERSONAGEM *Atacante,PERSONAGEM *Defensor);
 //funcoes de calculo de dano

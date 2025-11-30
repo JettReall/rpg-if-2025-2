@@ -27,51 +27,49 @@ enum efeitotipos{
 //-------------------------------------------------------------------------------------------------------------------
 //structs:
 
-typedef struct personagem personagem;
-
 typedef struct {
-    char nome[50];
-    char descricao[200];
-    int stat[7]; //status
-    int custo; //dinheiro
-}item;
+    char Nome[50];
+    char Descricao[200];
+    int Stat[7]; //status
+    int Custo; //dinheiro
+}ITEM;
 
 typedef struct{
-    char nome[50];
-    char descricao[200];
-    int tipo,valor;
-}carta;
+    char Nome[50];
+    char Descricao[200];
+    int Tipo,Valor;
+}CARTA;
 
 typedef struct {  //efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
-    char nome[50];
-    int tipo,valor,stat,contador;
-}efeito;
+    char Nome[50];
+    int Tipo,Valor,Stat,Contador;
+}EFEITO;
 
 typedef struct{ //baralho eh uma lista encadeada
-    carta c;    //carta eh um struct carta
-    nobaralho *prox;
-}nobaralho;
+    CARTA IntelCarta;    //carta eh um struct carta
+    NO_BARALHO *PtrProx;
+}NO_BARALHO;
 
 typedef struct {
-    char nome[50];//nome
-    int stat[7];//stats max
-    int hpatual,xp;//hp atual e xp atual
-    nobaralho *baralho; //baralho lista encadeada
-    carta cartas[200]; //todes as cartas do baralho total
-    item equipados[2]; //equipados:: quantidade ainda a decidir
-    item inventario[6];//itens guardados quantidade ainda a decidir
-    int coordenada[2];//coordenada no mapa da dungeon
-    int savepoint; //numero do ultimo checkpoint
-    efeito efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
-}personagem;
+    char Nome[50];//nome
+    int Stat[7];//stats max
+    int HpAtual,Xp;//hp atual e xp atual
+    NO_BARALHO *Baralho; //baralho lista encadeada
+    CARTA Cartas[200]; //todes as cartas do baralho total
+    ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
+    ITEM Inventario[6];//itens guardados quantidade ainda a decidir
+    int Coordenada[2];//coordenada no mapa da dungeon
+    int UltimoSavepoint; //numero do ultimo checkpoint
+    EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
+}PERSONAGEM;
+
+typedef struct{
+    char Nome[50];
+    ITEM Inventario[20];
+}NPC;
 
 typedef struct{
     char nome[50];
-    item inventario[20];
-}npc;
-
-typedef struct{
-    char nome[50];
-    int acessos[10];//possibilidades de caminhos q o player pode ir
-    personagem inimigos[4];//inimigos presentes no quarto
-}localDungeon;
+    char *Acessos[4][20];//possibilidades de caminhos q o player pode ir
+    PERSONAGEM inimigos[4];//inimigos presentes no quarto
+}MODELO_SALA_DUNGEON;
