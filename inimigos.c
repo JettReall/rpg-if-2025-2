@@ -4,7 +4,6 @@ personagem inimigo[22]= {0};
 
 void criarinimigos()
 {
-    personagem inimigo[22]= {0};
     // INIMIGO 0
     strcpy(inimigo[0].nome, "Inimigo 1");
     inimigo[0].stat[HPMAX]  = 0; inimigo[0].stat[DEFFIS] = 0; inimigo[0].stat[DEFMAG] = 0;
