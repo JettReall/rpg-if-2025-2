@@ -8,7 +8,7 @@
 
 
 //funcoes de efeito overtime
-void aplicaEfeito(EFEITO Efeito,PERSONAGEM *Personagem){ //aplica um efeito em algm
+void AplicaEfeito(EFEITO Efeito,PERSONAGEM *Personagem){ //aplica um efeito em algm
     int i=0;
     while(Personagem->Efeitos[i].Contador > 0)i++; //encontra um slot do arrayy de efeitos livre para aplicar
     Personagem->Efeitos[i]=Efeito; //aplica
@@ -56,13 +56,13 @@ int ComboFlat(CARTA Carta[3]){ //tabela de bonus de dano em combos
     return TabelaFlat[Carta[0].Tipo][Carta[1].Tipo][Carta[2].Tipo];
 }
 
-float comboporcento(CARTA Carta[3]){ //tabela de multiplicador de dano em combos
+float ComboPorcento(CARTA Carta[3]){ //tabela de multiplicador de dano em combos
     float tabelaporcento[3][3][3]=
     {0};//tem q criar ainda
     return tabelaporcento[Carta[0].Tipo][Carta[1].Tipo][Carta[2].Tipo];
 }
 
-int decidetipo(CARTA carta[3]){ //devolve o tipo predominante do combo
+int DecideTipo(CARTA carta[3]){ //devolve o tipo predominante do combo
     int Contagem[3]={0},tipo=0;
     for(int i=0;i<3;i++){
         Contagem[carta[i].Tipo]++;
@@ -95,7 +95,7 @@ void Dano(CARTA Carta[3],PERSONAGEM *Atacante,PERSONAGEM *Defensor){ //calcula o
                 break;
         }
     }
-    tipo=decidetipo(Carta); // decide o tipo predominante
+    tipo=DecideTipo(Carta); // decide o tipo predominante
     switch(tipo){ //diz o multiplicador e bonus do tipo predominante
         case ATAQUEFIS:
             multfis=ComboPorcento(Carta);
@@ -114,6 +114,6 @@ void Dano(CARTA Carta[3],PERSONAGEM *Atacante,PERSONAGEM *Defensor){ //calcula o
     danomag=((danomag+bonusmag+Atacante->Stat[ATQMAG])*multmag)-Defensor->Stat[DEFMAG]; //calculo o danomag final
     cura=(cura+bonuscura)*multcura;//calculo de cura final
 
-    causardano(danofis,danomag,cura,Atacante,Defensor);//atualiza as vidas dos combatentes
+    CausarDano(danofis,danomag,cura,Atacante,Defensor);//atualiza as vidas dos combatentes
 }
 //funcoes de calculoo de dano
