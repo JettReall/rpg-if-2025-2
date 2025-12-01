@@ -50,16 +50,20 @@ typedef struct{ //baralho eh uma lista encadeada
     NO_BARALHO *PtrProx;
 }NO_BARALHO;
 
+typedef struct{
+    int UltimoSavepoint;
+    CARTA Cartas[100];
+    int Dificuldade;
+    int Dinheiro;
+}savedados;
+
 typedef struct {
     char Nome[50];//nome
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
     NO_BARALHO *Baralho; //baralho lista encadeada
-    CARTA Cartas[200]; //todes as cartas do baralho total
     ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
     ITEM Inventario[6];//itens guardados quantidade ainda a decidir
-    int Coordenada[2];//coordenada no mapa da dungeon
-    int UltimoSavepoint; //numero do ultimo checkpoint
     EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
 }PERSONAGEM;
 
