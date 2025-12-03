@@ -45,7 +45,7 @@ typedef struct {  //efeitos overtime ex: bleed, poison, buff de dano, buff de de
     int Tipo,Valor,Stat,Contador;
 }EFEITO;
 
-typedef struct{ //baralho eh uma lista encadeada
+typedef struct NO_BARALHO{ //baralho eh uma lista encadeada
     CARTA Carta;    //carta eh um struct carta
     struct NO_BARALHO *PtrProx;
 }NO_BARALHO;

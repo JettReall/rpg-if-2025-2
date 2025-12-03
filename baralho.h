@@ -12,3 +12,4 @@ void Embaralhar(NO_BARALHO **baralho);
 void CriaBaralho(CARTA *array,NO_BARALHO **baralho,int qtd);
 void PrintBaralho(NO_BARALHO *b);
 CARTA PuxarCarta(NO_BARALHO **baralho,int *qtd);
+void RecarregaBaralho(NO_BARALHO **baralho,CARTA *array,int *qtdatual,int qtdtotal);

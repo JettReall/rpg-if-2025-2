@@ -3,11 +3,12 @@
 #include "structs.h"
 #include <time.h>
 
-void AdicionaCarta(CARTA n,NO_BARALHO **head){
+void AdicionaCarta(CARTA n,NO_BARALHO **head,int *qtd){
     NO_BARALHO *novo=malloc(sizeof(NO_BARALHO));
     novo->Carta=n;
     novo->PtrProx=*head;
     *head=novo;
+    *qtd=*qtd+1;
 }
 
 void RetiraCarta(int carta,NO_BARALHO **head,int *qtd){
@@ -16,6 +17,7 @@ void RetiraCarta(int carta,NO_BARALHO **head,int *qtd){
     if (carta == 1) {
         *head = atual->PtrProx;
         free(atual);
+        *qtd=*qtd-1;
         return;
     }
     for (int i = 1; i < carta && atual != NULL; i++) {
@@ -41,7 +43,6 @@ CARTA *listtoarray(NO_BARALHO *baralho, int *qtd){
         baralhoarr[i] = p->Carta;
         p = p->PtrProx;
     }
-
     return baralhoarr;
 }
 
@@ -63,17 +64,19 @@ void Embaralhar(NO_BARALHO **baralho){
     free(baralhoarr);
 }
 
-void CriaBaralho(CARTA *array,NO_BARALHO **baralho,int qtd){
-    for(int i=0;i<qtd;i++){
-        AdicionaCarta(array[i],baralho);
+void CriaBaralho(CARTA *array,NO_BARALHO **baralho,int qtdtotal,int *qtdatual){
+    
+    for(int i=0;i<qtdtotal;i++){
+        AdicionaCarta(array[i],baralho,qtdatual);
     }
 }
 
 void PrintBaralho(NO_BARALHO *b){
     while(b != NULL){
-        printf("%s %d\n", b->Carta.Nome, b->Carta.Valor);
+        printf("%s %d %d\n", b->Carta.Nome,b->Carta.Tipo, b->Carta.Valor);
         b = b->PtrProx;
     }
+    printf("\n");
 }
 
 CARTA PuxarCarta(NO_BARALHO **baralho,int *qtd){
@@ -83,10 +86,9 @@ CARTA PuxarCarta(NO_BARALHO **baralho,int *qtd){
 }
 
 void RecarregaBaralho(NO_BARALHO **baralho,CARTA *array,int *qtdatual,int qtdtotal){
-    for(int i=0;i<*qtdatual;i++){
-        RetiraCarta(1,baralho,1);
+    while(*qtdatual>0){
+        RetiraCarta(1,baralho,qtdatual);
     }
-    CriaBaralho(array,baralho,qtdtotal);
-    *qtdatual=qtdtotal;
+    CriaBaralho(array,baralho,qtdtotal,qtdatual);
     Embaralhar(baralho);
 }
