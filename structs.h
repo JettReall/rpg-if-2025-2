@@ -1,5 +1,5 @@
 //enuns:
-enum Stats{
+typedef enum {
     HPMAX,
     DEFFIS,
     DEFMAG,
@@ -7,7 +7,7 @@ enum Stats{
     ATQFIS,
     ATQMAG,
     NIVEL
-};
+}Stats;
 
 
 typedef enum{
@@ -17,11 +17,18 @@ typedef enum{
 }Tipo;
 
 
-enum efeitotipos{
+typedef enum {
     DANO,
     STATMOD
-};
+}Efeito_Tipos;
 
+typedef enum {
+    TEMPLO_BOSQUE,
+    TEMPLO_VENTO,
+    TEMPLO_AGUA,
+    TEMPLO_FOGO,
+    TEMPLO_FINAL
+}Dungeons;
 
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -55,7 +62,7 @@ typedef struct{
     CARTA Cartas[100];
     int Dificuldade;
     int Dinheiro;
-}savedados;
+}SAVE_DADOS;
 
 typedef struct {
     char Nome[50];//nome
@@ -73,7 +80,18 @@ typedef struct{
 }NPC;
 
 typedef struct{
-    char nome[50];
-    char *Acessos[4][20];//possibilidades de caminhos q o player pode ir
-    PERSONAGEM inimigos[4];//inimigos presentes no quarto
+    char Nome[50];
+    int MapaDun[2][6][6];
+    int Dificuldade_Base; //Cada dungeon vai ter um, que vai aumentar e isso é util pra setar a quantia de inimigos e na hora de escolher a dificuldade no começo do jogo.
+    int Max_Inimigos;//inimigos presentes no quarto
 }MODELO_SALA_DUNGEON;
+
+typedef struct{
+    char Nome[50];//nome
+    int Stat[7];//stats max
+    int HpAtual,Xp;//hp atual e xp atual
+    ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
+    EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
+    int Dungeon[5];//De qual dungeon ele faz parte. 0 = bosque, 1 = vento, 2 = água, 3 = fogo, 4 = Boss final.
+    int Dificuldade[4];// 1 = facil, 2 = medio, 3 = dificil, 4 = boss.
+}INIMIGOS;
