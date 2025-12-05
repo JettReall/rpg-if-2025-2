@@ -21,6 +21,18 @@ typedef enum {
     STATMOD
 }Efeito_Tipos;
 
+typedef enum {
+    NADA,
+    BAU,
+    ALAVANCA,
+    BOSS = 4 // Porfavor, não mudar esse numero.
+}Especiais;
+
+typedef enum {
+    INVALIDO,
+    VALIDO
+}Valido;
+
 //-------------------------------------------------------------------------------------------------------------------
 //structs:
 
@@ -82,7 +94,7 @@ typedef struct{
 typedef struct{
     char Nome[4][30];
     char Direção[4]; //possibilidades de caminhos q o player pode ir, começa de cima, sentido horario.
-    int Especiais; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca, 9 = boss...
-    int Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
+    Especiais Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca, 9 = boss...
+    Valido Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
     INIMIGOS inimigos[4];//inimigos presentes no quarto
 }MODELO_SALA_DUNGEON;

@@ -4,7 +4,7 @@
 INIMIGOS inimigo[5] = {0};
 void criar_ini_vento()
 {
-    // Inimigo 0
+    // INIMIGO 0
     strcpy(inimigo[0].Nome, "Inimigo 1");
     inimigo[0].Stat[HPMAX] = 0; inimigo[0].Stat[DEFFIS] = 0; inimigo[0].Stat[DEFMAG] = 0;
     inimigo[0].Stat[SPEED] = 0; inimigo[0].Stat[ATQFIS] = 0; inimigo[0].Stat[ATQMAG] = 0;
@@ -33,15 +33,15 @@ void criar_ini_vento()
     inimigo[3].HpAtual = 0; inimigo[3].Xp = 0;
 
     // Boss
-    strcpy(inimigo[4].Nome, "Inimigo 5");
-    inimigo[4].Stat[HPMAX] = 0; inimigo[4].Stat[DEFFIS] = 0; inimigo[4].Stat[DEFMAG] = 0;
-    inimigo[4].Stat[SPEED] = 0; inimigo[4].Stat[ATQFIS] = 0; inimigo[4].Stat[ATQMAG] = 0;
-    inimigo[4].Stat[NIVEL] = 0; inimigo[4].Dungeon = 0; inimigo[4].Dificuldade = 0;
-    inimigo[4].HpAtual = 0; inimigo[4].Xp = 0;
+    strcpy(inimigo[BOSS].Nome, "Inimigo 5");
+    inimigo[BOSS].Stat[HPMAX] = 0; inimigo[BOSS].Stat[DEFFIS] = 0; inimigo[BOSS].Stat[DEFMAG] = 0;
+    inimigo[BOSS].Stat[SPEED] = 0; inimigo[BOSS].Stat[ATQFIS] = 0; inimigo[BOSS].Stat[ATQMAG] = 0;
+    inimigo[BOSS].Stat[NIVEL] = 0; inimigo[BOSS].Dungeon = 0; inimigo[BOSS].Dificuldade = 0;
+    inimigo[BOSS].HpAtual = 0; inimigo[BOSS].Xp = 0;
 }
 void criar_ini_bosque()
 {
-    // Inimigo 0
+    // INIMIGO 0
     strcpy(inimigo[0].Nome, "Inimigo 1");
     inimigo[0].Stat[HPMAX] = 0; inimigo[0].Stat[DEFFIS] = 0; inimigo[0].Stat[DEFMAG] = 0;
     inimigo[0].Stat[SPEED] = 0; inimigo[0].Stat[ATQFIS] = 0; inimigo[0].Stat[ATQMAG] = 0;
@@ -70,15 +70,15 @@ void criar_ini_bosque()
     inimigo[3].HpAtual = 0; inimigo[3].Xp = 0;
 
     // Boss
-    strcpy(inimigo[4].Nome, "Inimigo 5");
-    inimigo[4].Stat[HPMAX] = 0; inimigo[4].Stat[DEFFIS] = 0; inimigo[4].Stat[DEFMAG] = 0;
-    inimigo[4].Stat[SPEED] = 0; inimigo[4].Stat[ATQFIS] = 0; inimigo[4].Stat[ATQMAG] = 0;
-    inimigo[4].Stat[NIVEL] = 0; inimigo[4].Dungeon = 0; inimigo[4].Dificuldade = 0;
-    inimigo[4].HpAtual = 0; inimigo[4].Xp = 0;
+    strcpy(inimigo[BOSS].Nome, "Inimigo 5");
+    inimigo[BOSS].Stat[HPMAX] = 0; inimigo[BOSS].Stat[DEFFIS] = 0; inimigo[BOSS].Stat[DEFMAG] = 0;
+    inimigo[BOSS].Stat[SPEED] = 0; inimigo[BOSS].Stat[ATQFIS] = 0; inimigo[BOSS].Stat[ATQMAG] = 0;
+    inimigo[BOSS].Stat[NIVEL] = 0; inimigo[BOSS].Dungeon = 0; inimigo[BOSS].Dificuldade = 0;
+    inimigo[BOSS].HpAtual = 0; inimigo[BOSS].Xp = 0;
 }
 void criar_ini_agua()
 {
-    // Inimigo 0
+    // INIMIGO 0
     strcpy(inimigo[0].Nome, "Inimigo 1");
     inimigo[0].Stat[HPMAX] = 0; inimigo[0].Stat[DEFFIS] = 0; inimigo[0].Stat[DEFMAG] = 0;
     inimigo[0].Stat[SPEED] = 0; inimigo[0].Stat[ATQFIS] = 0; inimigo[0].Stat[ATQMAG] = 0;
@@ -107,15 +107,15 @@ void criar_ini_agua()
     inimigo[3].HpAtual = 0; inimigo[3].Xp = 0;
 
     // Boss
-    strcpy(inimigo[4].Nome, "Inimigo 5");
-    inimigo[4].Stat[HPMAX] = 0; inimigo[4].Stat[DEFFIS] = 0; inimigo[4].Stat[DEFMAG] = 0;
-    inimigo[4].Stat[SPEED] = 0; inimigo[4].Stat[ATQFIS] = 0; inimigo[4].Stat[ATQMAG] = 0;
-    inimigo[4].Stat[NIVEL] = 0; inimigo[4].Dungeon = 0; inimigo[4].Dificuldade = 0;
-    inimigo[4].HpAtual = 0; inimigo[4].Xp = 0;
+    strcpy(inimigo[BOSS].Nome, "Inimigo 5");
+    inimigo[BOSS].Stat[HPMAX] = 0; inimigo[BOSS].Stat[DEFFIS] = 0; inimigo[BOSS].Stat[DEFMAG] = 0;
+    inimigo[BOSS].Stat[SPEED] = 0; inimigo[BOSS].Stat[ATQFIS] = 0; inimigo[BOSS].Stat[ATQMAG] = 0;
+    inimigo[BOSS].Stat[NIVEL] = 0; inimigo[BOSS].Dungeon = 0; inimigo[BOSS].Dificuldade = 0;
+    inimigo[BOSS].HpAtual = 0; inimigo[BOSS].Xp = 0;
 }
 void criar_ini_fogo()
 {
-    // Inimigo 0
+    // INIMIGO 0
     strcpy(inimigo[0].Nome, "Inimigo 1");
     inimigo[0].Stat[HPMAX] = 0; inimigo[0].Stat[DEFFIS] = 0; inimigo[0].Stat[DEFMAG] = 0;
     inimigo[0].Stat[SPEED] = 0; inimigo[0].Stat[ATQFIS] = 0; inimigo[0].Stat[ATQMAG] = 0;
@@ -144,18 +144,18 @@ void criar_ini_fogo()
     inimigo[3].HpAtual = 0; inimigo[3].Xp = 0;
 
     // Boss
-    strcpy(inimigo[4].Nome, "Inimigo 5");
-    inimigo[4].Stat[HPMAX] = 0; inimigo[4].Stat[DEFFIS] = 0; inimigo[4].Stat[DEFMAG] = 0;
-    inimigo[4].Stat[SPEED] = 0; inimigo[4].Stat[ATQFIS] = 0; inimigo[4].Stat[ATQMAG] = 0;
-    inimigo[4].Stat[NIVEL] = 0; inimigo[4].Dungeon = 0; inimigo[4].Dificuldade = 0;
-    inimigo[4].HpAtual = 0; inimigo[4].Xp = 0;
+    strcpy(inimigo[BOSS].Nome, "Inimigo 5");
+    inimigo[BOSS].Stat[HPMAX] = 0; inimigo[BOSS].Stat[DEFFIS] = 0; inimigo[BOSS].Stat[DEFMAG] = 0;
+    inimigo[BOSS].Stat[SPEED] = 0; inimigo[BOSS].Stat[ATQFIS] = 0; inimigo[BOSS].Stat[ATQMAG] = 0;
+    inimigo[BOSS].Stat[NIVEL] = 0; inimigo[BOSS].Dungeon = 0; inimigo[BOSS].Dificuldade = 0;
+    inimigo[BOSS].HpAtual = 0; inimigo[BOSS].Xp = 0;
 }
 void criar_ini_final()
 {
     // Boss
-    strcpy(inimigo[4].Nome, "Inimigo 5");
-    inimigo[4].Stat[HPMAX] = 0; inimigo[4].Stat[DEFFIS] = 0; inimigo[4].Stat[DEFMAG] = 0;
-    inimigo[4].Stat[SPEED] = 0; inimigo[4].Stat[ATQFIS] = 0; inimigo[4].Stat[ATQMAG] = 0;
-    inimigo[4].Stat[NIVEL] = 0; inimigo[4].Dungeon = 0; inimigo[4].Dificuldade = 0;
-    inimigo[4].HpAtual = 0; inimigo[4].Xp = 0;
+    strcpy(inimigo[BOSS].Nome, "Inimigo 5");
+    inimigo[BOSS].Stat[HPMAX] = 0; inimigo[BOSS].Stat[DEFFIS] = 0; inimigo[BOSS].Stat[DEFMAG] = 0;
+    inimigo[BOSS].Stat[SPEED] = 0; inimigo[BOSS].Stat[ATQFIS] = 0; inimigo[BOSS].Stat[ATQMAG] = 0;
+    inimigo[BOSS].Stat[NIVEL] = 0; inimigo[BOSS].Dungeon = 0; inimigo[BOSS].Dificuldade = 0;
+    inimigo[BOSS].HpAtual = 0; inimigo[BOSS].Xp = 0;
 }

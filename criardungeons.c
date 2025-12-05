@@ -5,16 +5,17 @@
 #include "inimigos.h"
 #include "varglobal.h"
 
-void criardugeon(MODELO_SALA_DUNGEON mapa[6][6], int dificuldade, int tipodungeon){
+void CriarDungeon(MODELO_SALA_DUNGEON mapa[6][6], int dificuldade, int tipodungeon){
     srand(time(NULL));
-    selecionadungeon(tipodungeon);
+    SelecionaDungeon(tipodungeon);
+    CriaSalaBoss(mapa);
     int inimigos_max = 0, x = 0, y = 0, z = 0, temp = 0;
     tipodungeon *= dificuldade;
     while (inimigos_max < dificuldade * tipodungeon)
     {
         if (temp < max_inimigo_sala)
         {
-            if (mapa[x][y].Especiais == 0 && mapa[x][y].Lugar_Valido == 1)
+            if (mapa[x][y].Tipo_Especial == NADA && mapa[x][y].Lugar_Valido == VALIDO)
             {
             z = 1 + rand() % max_inimigo_Dungeon + (dificuldade_max - dificuldade);
             if (z > max_inimigo_Dungeon) {temp ++; continue;}
@@ -29,7 +30,7 @@ void criardugeon(MODELO_SALA_DUNGEON mapa[6][6], int dificuldade, int tipodungeo
         if (x == 6) break;
     }
 }
-void selecionadungeon(int tipodungeon)
+void SelecionaDungeon(int tipodungeon)
 {
     switch(tipodungeon)
     {
@@ -50,3 +51,16 @@ void selecionadungeon(int tipodungeon)
         break;
     }
 }
+    void CriaSalaBoss(MODELO_SALA_DUNGEON mapa[6][6])
+    {
+        for (int x = 0; x < 6; x++)
+        {
+            for (int y = 0; y < 6; y++)
+            {
+                if (mapa[x][y].Tipo_Especial == BOSS)
+                {
+                    mapa[x][y].inimigos[0] = inimigo[BOSS];
+                }
+            }
+        }
+    }
