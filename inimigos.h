@@ -10,6 +10,5 @@ void criar_ini_bosque();
 void criar_ini_agua();
 void criar_ini_fogo();
 void criar_ini_final();
-int max_inimigo = 4; // Nao contabiliza o boss.
 
 #endif
