@@ -25,13 +25,29 @@ typedef enum {
     NADA,
     BAU,
     ALAVANCA,
-    BOSS = 4 // Porfavor, não mudar esse numero.
+    SALA_BOSS
 }Especiais;
 
 typedef enum {
     INVALIDO,
     VALIDO
 }Valido;
+
+typedef enum {
+    FINAL,
+    VENTO,
+    BOSQUE,
+    AGUA,
+    FOGO,
+}Dungeon;
+
+typedef enum {
+    BOSS,
+    FACIL,
+    MEDIO,
+    DIFICIL
+}Dificuldade_M;
+
 
 //-------------------------------------------------------------------------------------------------------------------
 //structs:
@@ -87,14 +103,12 @@ typedef struct{
     int HpAtual,Xp;//hp atual e xp atual
     ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
     EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
-    int Dungeon;//De qual dungeon ele faz parte. 0 = bosque, 1 = vento, 2 = água, 3 = fogo, 4 = Boss final.
-    int Dificuldade;// 0 = facil, 1 = medio, 2= dificil, 3 = boss.
 }INIMIGOS;
 
 typedef struct{
     char Nome[4][30];
     char Direção[4]; //possibilidades de caminhos q o player pode ir, começa de cima, sentido horario.
-    Especiais Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca, 9 = boss...
+    Especiais Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca...
     Valido Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
     INIMIGOS inimigos[4];//inimigos presentes no quarto
 }MODELO_SALA_DUNGEON;
