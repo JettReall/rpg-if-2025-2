@@ -3,7 +3,7 @@
 #include "structs.h"
 
 // Declara o array global
-extern INIMIGOS inimigo[5];
+extern INIMIGOS inimigo[4];
 // Declara a função que preenche os inimigos
 void criar_ini_vento();
 void criar_ini_bosque();
