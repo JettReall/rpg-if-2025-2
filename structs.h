@@ -16,20 +16,10 @@ typedef enum{
     CURA,
 }Tipo;
 
-
 typedef enum {
     DANO,
     STATMOD
 }Efeito_Tipos;
-
-typedef enum {
-    TEMPLO_BOSQUE,
-    TEMPLO_VENTO,
-    TEMPLO_AGUA,
-    TEMPLO_FOGO,
-    TEMPLO_FINAL
-}Dungeons;
-
 
 //-------------------------------------------------------------------------------------------------------------------
 //structs:
@@ -60,7 +50,7 @@ typedef struct NO_BARALHO{ //baralho eh uma lista encadeada
 typedef struct{
     int UltimoSavepoint;
     CARTA Cartas[100];
-    int Dificuldade;
+    int Dificuldade; //Facil = 5, Medio = 10, Dificil = 15;
     int Dinheiro;
 }SAVE_DADOS;
 
@@ -80,18 +70,19 @@ typedef struct{
 }NPC;
 
 typedef struct{
-    char Nome[50];
-    int MapaDun[2][6][6];
-    int Dificuldade_Base; //Cada dungeon vai ter um, que vai aumentar e isso é util pra setar a quantia de inimigos e na hora de escolher a dificuldade no começo do jogo.
-    int Max_Inimigos;//inimigos presentes no quarto
-}MODELO_SALA_DUNGEON;
-
-typedef struct{
     char Nome[50];//nome
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
     ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
     EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
-    int Dungeon[5];//De qual dungeon ele faz parte. 0 = bosque, 1 = vento, 2 = água, 3 = fogo, 4 = Boss final.
-    int Dificuldade[4];// 1 = facil, 2 = medio, 3 = dificil, 4 = boss.
+    int Dungeon;//De qual dungeon ele faz parte. 0 = bosque, 1 = vento, 2 = água, 3 = fogo, 4 = Boss final.
+    int Dificuldade;// 0 = facil, 1 = medio, 2= dificil, 3 = boss.
 }INIMIGOS;
+
+typedef struct{
+    char Nome[4][30];
+    char Direção[4]; //possibilidades de caminhos q o player pode ir, começa de cima, sentido horario.
+    int Especiais; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca, 9 = boss...
+    int Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
+    INIMIGOS inimigos[4];//inimigos presentes no quarto
+}MODELO_SALA_DUNGEON;
