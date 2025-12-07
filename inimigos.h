@@ -3,8 +3,14 @@
 #include "structs.h"
 
 // Declara o array global
-extern PERSONAGEM inimigo[22];
+extern INIMIGOS inimigo[4];
+extern INIMIGOS Inimigo_Nulo[1];
 // Declara a função que preenche os inimigos
-void criarinimigos();
+void criar_ini_vento();
+void criar_ini_bosque();
+void criar_ini_agua();
+void criar_ini_fogo();
+void criar_ini_final();
+void criar_ini_nulo();
 
 #endif

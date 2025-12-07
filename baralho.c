@@ -80,15 +80,17 @@ void PrintBaralho(NO_BARALHO *b){
 }
 
 CARTA PuxarCarta(NO_BARALHO **baralho,int *qtd){
+    printf("funcao puxar carta\n");
     CARTA carta=(*baralho)->Carta;
     RetiraCarta(1,baralho,qtd);
+    printf("retirou uma carta\n");
     return carta;
 }
 
 void RecarregaBaralho(NO_BARALHO **baralho,CARTA *array,int *qtdatual,int qtdtotal){
     while(*qtdatual>0){
         RetiraCarta(1,baralho,qtdatual);
-    }
+    } 
     CriaBaralho(array,baralho,qtdtotal,qtdatual);
     Embaralhar(baralho);
 }

@@ -1,5 +1,8 @@
+#ifndef STRUCTS_H
+#define STRUCTS_H
+
 //enuns:
-enum Stats{
+typedef enum{
     HPMAX,
     DEFFIS,
     DEFMAG,
@@ -7,7 +10,7 @@ enum Stats{
     ATQFIS,
     ATQMAG,
     NIVEL
-};
+}Stats;
 
 
 typedef enum{
@@ -16,18 +19,44 @@ typedef enum{
     CURA,
 }Tipo;
 
+typedef enum{
+    DANOC,
+    STATMOD,
+    AOE
+}Efeito_Tipos;
 
-enum efeitotipos{
-    DANO,
-    STATMOD
-};
+typedef enum{
+    NADA,
+    BAU,
+    ALAVANCA,
+    SALA_BOSS
+}Especiais;
 
+typedef enum{
+    INVALIDO,
+    VALIDO
+}Valido;
+
+typedef enum{
+    FINAL,
+    VENTO,
+    BOSQUE,
+    AGUA,
+    FOGO,
+}Dungeon;
+
+typedef enum{
+    BOSS,
+    FACIL,
+    MEDIO,
+    DIFICIL
+}Dificuldade_M;
 
 
 //-------------------------------------------------------------------------------------------------------------------
 //structs:
 
-typedef struct {
+typedef struct{
     char Nome[50];
     char Descricao[200];
     int Stat[7]; //status
@@ -40,7 +69,7 @@ typedef struct{
     int Tipo,Valor;
 }CARTA;
 
-typedef struct {  //efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
+typedef struct{  //efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
     char Nome[50];
     int Tipo,Valor,Stat,Contador;
 }EFEITO;
@@ -53,19 +82,32 @@ typedef struct NO_BARALHO{ //baralho eh uma lista encadeada
 typedef struct{
     int UltimoSavepoint;
     CARTA Cartas[100];
-    int Dificuldade;
+    int QtdCartas;
+    int Dificuldade; //Facil = 5, Medio = 10, Dificil = 15;
     int Dinheiro;
-}savedados;
+}SAVE_DADOS;
 
-typedef struct {
+typedef struct{
     char Nome[50];//nome
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
-    NO_BARALHO *Baralho; //baralho lista encadeada
+    //baralho lista encadeada
     ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
     ITEM Inventario[6];//itens guardados quantidade ainda a decidir
     EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
 }PERSONAGEM;
+
+typedef struct{
+    int Bonus;
+    int Multiplier;
+    EFEITO *Efeito;
+}ELEMENTO_TABELA;
+
+typedef struct{
+    int QtdCartaAtual;
+    int QtdCartaTotal;
+    int QtdCartamaoatual;
+}DADOS_BATALHA;
 
 typedef struct{
     char Nome[50];
@@ -73,7 +115,25 @@ typedef struct{
 }NPC;
 
 typedef struct{
-    char nome[50];
-    char *Acessos[4][20];//possibilidades de caminhos q o player pode ir
-    PERSONAGEM inimigos[4];//inimigos presentes no quarto
+    char Nome[30];
+    int Tipo, Valor;
+}SKILL_INI;
+
+typedef struct{
+    char Nome[50];//nome
+    int Stat[7];//stats max
+    int HpAtual,Xp;//hp atual e xp atual
+    ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
+    EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
+    SKILL_INI Habilidades[2];
+}INIMIGOS;
+
+typedef struct{
+    char Nome[4][30];
+    char Direção[4]; //possibilidades de caminhos q o player pode ir, começa de cima, sentido horario.
+    Especiais Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca...
+    Valido Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
+    INIMIGOS inimigos[4];//inimigos presentes no quarto
 }MODELO_SALA_DUNGEON;
+
+#endif
