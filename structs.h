@@ -1,3 +1,6 @@
+#ifndef STRUCTS_H     // Se STRUCTS_H não está definido
+#define STRUCTS_H 
+
 //enuns:
 typedef enum {
     HPMAX,
@@ -25,7 +28,9 @@ typedef enum {
     NADA,
     BAU,
     ALAVANCA,
-    SALA_BOSS
+    SALA_BOSS,
+    ENTRADA,
+    OBSTACULO,
 }Especiais;
 
 typedef enum {
@@ -48,7 +53,12 @@ typedef enum {
     DIFICIL
 }Dificuldade_M;
 
-
+typedef enum {
+    NORTE,
+    LESTE,
+    SUL, 
+    OESTE,
+} DIRECOES;
 //-------------------------------------------------------------------------------------------------------------------
 //structs:
 
@@ -106,9 +116,11 @@ typedef struct{
 }INIMIGOS;
 
 typedef struct{
-    char Nome[4][30];
-    char Direção[4]; //possibilidades de caminhos q o player pode ir, começa de cima, sentido horario.
-    Especiais Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca...
-    Valido Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
+    char DescricaoSala[200];
+    char Direcoes[4][30]; //Norte, Leste, Sul, Oeste
+    int Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca...
+    int Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
     INIMIGOS inimigos[4];//inimigos presentes no quarto
 }MODELO_SALA_DUNGEON;
+
+#endif
