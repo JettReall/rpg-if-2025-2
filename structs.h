@@ -31,6 +31,7 @@ typedef enum {
     SALA_BOSS,
     ENTRADA,
     OBSTACULO,
+    SEM_MOB,
 }Especiais;
 
 typedef enum {

@@ -8,6 +8,20 @@ int main() {
      int Dungeon;
      scanf("%d",&Dungeon);
      InicializarDungeon(Dungeon);
+     /*
+     for(int i = 0; i < LINHAS; i++) {
+          for(int j = 0; j < COLUNAS; j++) {
+               // Pula a linha "Sala x,y"
+             if (DungeonAtual[i][j].Lugar_Valido==VALIDO) {
+               printf("%d %d\n",i,j);
+               //printf("%s\n",DungeonAtual[i][j].DescricaoSala);
+               printf("---\n");
+             }
+               
+          }
+     }
+  */
+
      return 0;
 }
 
@@ -15,7 +29,7 @@ int InicializarDungeon(int DungeonEscolhida) {
      FILE *ArqPtr = NULL;
      char buffer[256];
 
-     switch (DungeonEscolhida) {
+     switch (DungeonEscolhida) { //De acordo com o valor dungeon passada pra ele, ele abre o arquivo da dungeon
      case BOSQUE:
           ArqPtr = fopen("TemploBosqueMapa.txt","r");
           break;
@@ -40,6 +54,12 @@ int InicializarDungeon(int DungeonEscolhida) {
                if(fgets(buffer, sizeof(buffer), ArqPtr) == NULL) break;
                
                lerSalaDoArquivo(ArqPtr, &DungeonAtual[i][j]);
+               //Lê a informação de cada sala, primeiro as colunas, depois as linhas
+               for (int k = 0; k < max_inimigo_Dungeon; k++) {
+                    DungeonAtual[i][j].inimigos[k] = InimigoVazio;
+                    //copia para os locais de inimigos, uma struct de inimigo vazio
+               }
+               
           }
      }
      return 0;
@@ -48,11 +68,12 @@ int InicializarDungeon(int DungeonEscolhida) {
 
 void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala) {
      char buffer[256];
-     
+     //Ele lÊ sala a sala, uma por uma
      // Linha 1: descrição
      fgets(sala->DescricaoSala, sizeof(sala->DescricaoSala), arquivo);
      sala->DescricaoSala[strcspn(sala->DescricaoSala, "\n")] = '\0';
-     
+     //Lê e limpa o buffer do \n no fim
+
      // Linha 2: 4 direções separadas por vírgula
      fgets(buffer, sizeof(buffer), arquivo);
      sscanf(buffer, "%[^,], %[^,], %[^,], %s", 
