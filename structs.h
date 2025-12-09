@@ -12,6 +12,11 @@ typedef enum {
     NIVEL
 }Stats;
 
+enum Coordenadas {
+    X,
+    Y,
+};
+
 
 typedef enum{
     ATAQUEFIS,
