@@ -7,22 +7,7 @@
 
 int main() {
      AbrirArquivoDungeon(VENTO); //USa de um switch para abrir o arquivo correto
-     /*
-     
-     printf("----------------------Resultado final:-----------------------\n");
-     for(int i = 0; i < LINHAS; i++) {
-          for(int j = 0; j < COLUNAS; j++) {
-               
-                    printf("%s\n%s\n%s\n%s\n---\n",
-                    DungeonAtual[i][j].Direcoes[NORTE], 
-                    DungeonAtual[i][j].Direcoes[LESTE], 
-                    DungeonAtual[i][j].Direcoes[SUL], 
-                    DungeonAtual[i][j].Direcoes[OESTE]);
-                    
-          }
-     }
-     
-     */
+    
      do {
           printf("-----------%d,%d-----------\n",Coordenadas[X],Coordenadas[Y]);
           SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
@@ -32,6 +17,8 @@ int main() {
      
      return 0;
 }
+
+//---------------------------------------------------------------------------------------------------
 
 void AbrirArquivoDungeon(int Dungeon) {
      char buffer[256];
@@ -153,8 +140,10 @@ void ValidarOpcaoSelecionada(int *Selecionada) {
 
 void EfeitoDeSala(int TipoDeSala) {
      if (TipoDeSala == ALAVANCA) {
+          printf("Puxando alvanca\n");
          for (int i = 0; i < AlavancasQtd; i++) { //Checa as salas de alavanca, quando acha a sala atual, libera a passagem conectada
-               if(AlavancasDungeon[i].Alavanca_X == Coordenadas[X] && AlavancasDungeon->Alavanca_Y == Coordenadas[Y]) { //checa as coordenadas e acha as iguais da sala atual
+               if(AlavancasDungeon[i].Alavanca_X == Coordenadas[X] && AlavancasDungeon[i].Alavanca_Y == Coordenadas[Y]) { //checa as coordenadas e acha as iguais da sala atual
+                         printf("Click\n");
                     if (AlavancasDungeon->Ativada==ATIVADO) {
                          printf("Alavanca já puxada\n"); //imprime caso já tenha sido ativada, se o player puxar mais de uma vez
                     } else {
@@ -178,6 +167,7 @@ void Andar() {
      char VesselParaDescDirecao[40] = "\0";
      MODELO_SALA_DUNGEON *ChecagemDeCaminhada = NULL; //ponteiro para checagem se  direção é válida
 
+     //Checa se o local é válido para ir
      for (int i = 0; i < DIRECAO; i++) {
           ChecagemDeCaminhada = SalaAtual; //Endereça a sala atual
           ChecagemDeCaminhada+=DirecaoValorCalculo[i]; //Usa da aritmetica de ponteiros para dar saltos para ir para um adjacente. Ex.: Pro sul, o ponteiro salta exatamente para o que está abaixo de sala atual (Ptr+QtdColunas)
@@ -190,12 +180,18 @@ void Andar() {
                printf("%d.%8s: %40s\n",i,DirecoesNome[i],VesselParaDescDirecao); // Imprimir acessos para salas válidas
           };
      }
+
      printf("Para onde ir?\n");
      do {
           scanf("%d",&DirecaoEscolhida);
           if (Validados[DirecaoEscolhida] == VALIDO) {
                Coordenadas[X] += CalculoCoordX[DirecaoEscolhida]; //Passa as coordenadas para ser setado no próximo loop
                Coordenadas[Y] += CalculoCoordY[DirecaoEscolhida];
+                    if ((Coordenadas[X] < 0 || Coordenadas[X] > COLUNAS) || (Coordenadas[Y] < 0 || Coordenadas[Y] > LINHAS)) {
+                         Coordenadas[X] -= CalculoCoordX[DirecaoEscolhida];
+                         printf("Nao pode ir nessa direção.\n");
+                    }; //Comando para evitar "Out of Bounds"
+
           } else if (Validados[DirecaoEscolhida]== OBSTACULO){
                printf("Não dá para passar por aqui\n");
                printf("%s\n",DescDoObstaculo); //Descrição passada no ato de leitura do arquivo
