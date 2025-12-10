@@ -59,14 +59,14 @@ LOCAL Locais[MAXDESTINOS] = {
      {
           DUNGEON,
           "Caminho longo","Um caminho longo que sai da estrada com uma encruzilhada a frente, para cada caminho há uma placa apontando um templo.",
-          {"Voltar para a cidade","Entrar em uma dungeon","\0"},
+          {"Voltar para a cidade","Ir para uma dungeon","\0"},
           {CONEXAO_NULA,CONEXAO_NULA,CONEXAO_NULA},
           NULL
      },
      {
           PRACA,
           "Praça","Uma praça genérica de cidade medieval, não há muita gente aqui",
-          {"\0"},
+          {"Caminhar","Falar com NPCs","\0"},
           {CONEXAO_NULA,CONEXAO_NULA,CONEXAO_NULA},
           NULL
      },
@@ -84,11 +84,15 @@ LOCAL *LocalAtual = NULL;
 
 const int OpcoesQtd[MAXDESTINOS] = {CASA_OPT,DUNGEON_OPT,PRACA_OPT,TABERNA_OPT};
 int Loop = 1;
+int DungeonsLiberadas = 1;
+
 
 
 int OpcoesLocal(int Local);
 void InicializarCidade();
 void TrocarDeLugar(int ID_Atual);
+void EntrarDungeon();
+extern int ExplorarDungeon(int Escolhida);
 
 void OpcoesCasa(int Selecionada);
 void OpcoesDungeon(int Selecionada);

@@ -4,8 +4,8 @@
 #include "explorardungeon.h"
 
 
-int main() {
-     AbrirArquivoDungeon(VENTO); //USa de um switch para abrir o arquivo correto
+int ExplorarDungeon(int Escolhida) {
+     AbrirArquivoDungeon(Escolhida); //USa de um switch para abrir o arquivo correto
     
      do {
           printf("-----------%d,%d-----------\n",Coordenadas[X],Coordenadas[Y]);

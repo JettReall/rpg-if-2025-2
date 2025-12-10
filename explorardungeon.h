@@ -21,8 +21,8 @@ enum OpcoesMenu {
 };
 
 enum Ativacao{
-     NAO_ATIVADO,
-     ATIVADO,
+     NAO_ATIVADO = 0, FECHADO = 0,
+     ATIVADO = 1, ABERTO = 1,
 };
 
 char DescParaObstaculo[TEMPLOS][MAX_TAM_DESCRICAO] = {
@@ -78,6 +78,7 @@ int AlavancasQtd = 0;
 
 FILE *ArqPtr = NULL;
 
+int ExplorarDungeon(int Escolhida);
 void AbrirArquivoDungeon(int Dungeon);
 int InicializarDungeon(int DungeonEscolhida);
 void InteragirEmSala();
@@ -87,4 +88,5 @@ void ValidarOpcaoSelecionada(int *Selecionada);
 void EfeitoDeSala(int TipoDeSala);
 void ChecarComAndar(int DirEscolhida,int Validado,int Calculo);
 extern void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala);
+int ExplorarDungeon(int Escolhida);
 

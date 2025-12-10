@@ -84,9 +84,36 @@ void OpcoesDungeon(int Selecionada) {
           TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
      case ENTRAR_DUNGEON:
-          printf("Qual dungeon?\n");
+          printf("Cada placa aponta para um canto diferente.\n");
+          EntrarDungeon();
           break;
      }
+}
+
+void EntrarDungeon() {
+     int CaminhoDungeon = 0;
+     int DungeonsAbertas[TEMPLOS] = {ABERTO,FECHADO,FECHADO,FECHADO};
+
+     char NomePlaca[20] = "\0";
+     char OutraParteNome[TEMPLOS][10] = {
+          "do Vento","do Bosque","da Água","do Fogo",
+     };
+     for (int i = 0; i < TEMPLOS; i++) {
+          strcpy(NomePlaca,"Templo ");
+          strcat(NomePlaca,OutraParteNome[i]);
+          printf("%d. %20s\n",i+1,NomePlaca);
+     }
+          do {
+               scanf("%d",&CaminhoDungeon);
+          } while (!(CaminhoDungeon > 0 && CaminhoDungeon <=TEMPLOS));
+          printf("Você seguiu o caminho até chegar na entrada da masmorra.\n");
+          if (DungeonsAbertas[CaminhoDungeon-1] == ABERTO) {
+               //ExplorarDungeon(CaminhoDungeon);
+               printf("Cheguei à dungeon\n");
+          } else {
+               printf("Você caminha e encontra o templo trancado... não há muito o que fazer por agora\n");
+               printf("Uma caminhada de volta, criticando o código de quem não pensou um jeito melhor de alertar o jogador, depois; você volta à placa\n");
+          }
 }
 
 void OpcoesPraca(int Selecionada) {
@@ -95,7 +122,7 @@ void OpcoesPraca(int Selecionada) {
           TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
      case CONVERSAR:
-          printf("Qual dungeon?\n");
+          printf("Os NPCs corromperam, tentativas de falar com eles podem não ocasionar coisas boas...\n");
           break;
      }
 }
@@ -106,10 +133,10 @@ void OpcoesTaberna(int Selecionada) {
           TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
      case CONVERSAR:
-          printf("Qual dungeon?\n");
+          printf("Os que não se corromperam são os desmaiados de tanto beber.\n");
           break;
      case LOJISTA:
-          printf("Ele não está aqui.\n");
+          printf("O lojista está corrompido... Comprar algo com código duvidoso não parece uma escolha muito sábia.\n");
           break;
      }
 }
