@@ -4,8 +4,8 @@
 #define CONEXAO_NULA -1
 enum OpcoesCidade{
      SAIR_LOCAL = 1,
-     SALVAR = 2, ENTRAR_DUNGEON = 2,
-     MEXER_BARALHO = 3,
+     SALVAR = 2, ENTRAR_DUNGEON = 2, CONVERSAR =2,
+     MEXER_BARALHO = 3, LOJISTA = 3,
 };
 
 enum Destinos {
@@ -72,8 +72,8 @@ LOCAL Locais[MAXDESTINOS] = {
      },
      {
           TABERNA,
-          "Taberna Basilisco","A taberna mais genérica que o estagiário pôde pensar... pelo menos foi bem feita, tem o bartenter, gente no palco, e muitos bêbados.",
-          {"\0"},
+          "Taberna Basilisco","A taberna mais genérica que o estagiário pôde pensar... pelo menos foi bem feita, tem o bartenter, gente no palco, e muitos bêbados... e um encapuzado esquisito na bancada",
+          {"Voltar à praça","Conversar com o encapuzado","Falar com o Lojista"},
           {CONEXAO_NULA,CONEXAO_NULA,CONEXAO_NULA},
           NULL
      },

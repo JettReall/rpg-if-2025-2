@@ -94,7 +94,7 @@ void OpcoesPraca(int Selecionada) {
      case SAIR_LOCAL:
           TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
-     case ENTRAR_DUNGEON:
+     case CONVERSAR:
           printf("Qual dungeon?\n");
           break;
      }
@@ -105,8 +105,11 @@ void OpcoesTaberna(int Selecionada) {
      case SAIR_LOCAL:
           TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
-     case ENTRAR_DUNGEON:
+     case CONVERSAR:
           printf("Qual dungeon?\n");
+          break;
+     case LOJISTA:
+          printf("Ele não está aqui.\n");
           break;
      }
 }
