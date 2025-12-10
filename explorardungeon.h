@@ -25,7 +25,7 @@ enum Ativacao{
      ATIVADO,
 };
 
-char DescParaObstaculo[TEMPLOS][100] = {
+char DescParaObstaculo[TEMPLOS][MAX_TAM_DESCRICAO] = {
      "Uma corrente de vento muito forte  sai do chão, não deixando nada passar.",
      "As vinhas estão densas e amontoadas demais para passar por aqui.",
      "A sala está cheia de água, deve ser para mergulhar, mas não tem como passar assim.",
@@ -33,7 +33,7 @@ char DescParaObstaculo[TEMPLOS][100] = {
 
 };
 
-char DescDoObstaculo[100] = "\0";
+char DescDoObstaculo[MAX_TAM_DESCRICAO] = "\0";
 
 typedef struct {
      int Alavanca_X;

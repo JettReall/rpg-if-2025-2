@@ -1,7 +1,6 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <direct.h>
 #include "explorardungeon.h"
 
 
