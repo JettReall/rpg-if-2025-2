@@ -45,8 +45,7 @@ typedef enum {
 }Valido;
 
 typedef enum {
-    FINAL,
-    VENTO,
+    VENTO = 1,
     BOSQUE,
     AGUA,
     FOGO,
@@ -57,7 +56,7 @@ typedef enum {
     FACIL,
     MEDIO,
     DIFICIL
-}Dificuldade_M;
+}Dificuldade;
 
 typedef enum {
     NORTE,
@@ -114,11 +113,17 @@ typedef struct{
 }NPC;
 
 typedef struct{
+    char Nome[30];
+    int Tipo, Valor;
+}SKILL_INI;
+
+typedef struct{
     char Nome[50];//nome
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
     ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
     EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
+    SKILL_INI Habilidades[2];
 }INIMIGOS;
 
 typedef struct{
