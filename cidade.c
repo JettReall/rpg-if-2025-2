@@ -1,26 +1,63 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "cidade.h"
 
 int main() {
-     int LocalAtual = 0;
-     for (int i = 0; i < 3; i++) {
-          OpcoesDeCadaLocal[LocalAtual](OpcoesLocal(LocalAtual)); //Ponteiro de função que acessa função referente ao local, imprime o que tem de lá e escolhe 
+     InicializarCidade();
+     LocalAtual = &Locais[CASA];
+     while(Loop) {
+          printf("%s\n",LocalAtual->DadosLocal.DescricaoLocal);
+          OpcoesDeCadaLocal[LocalAtual->DadosLocal.ID](OpcoesLocal(LocalAtual->DadosLocal.ID)); //Ponteiro de função que acessa função referente ao local, imprime o que tem de lá e escolhe 
      }
-     LocalAtual++;
-     OpcoesDeCadaLocal[LocalAtual](OpcoesLocal(LocalAtual));
      //Imprime as opções pra ele
      //Escaneia o input
      //Valida a opção
+     
 }
+
+void InicializarCidade() {
+     int e = 0;
+     int Conexoes[MAXDESTINOS][MAXDESTINOS] = {
+          {N_CONECTADO,N_CONECTADO,CONECTADO,CONECTADO},
+          {N_CONECTADO,N_CONECTADO,CONECTADO,N_CONECTADO},
+          {CONECTADO,CONECTADO,N_CONECTADO,CONECTADO},
+          {CONECTADO,N_CONECTADO,CONECTADO,N_CONECTADO},
+     };
+     int LocalInicalizando = 0;
+
+     //printf("Aberto inicializador %d\n", Locais[1].DadosLocal.ID);
+     for (int i = 0; i < MAXDESTINOS;i++) {
+          e=0;
+          //printf("%d %d %d|||",Locais[i].ConexaoID[0],Locais[i].ConexaoID[1],Locais[i].ConexaoID[2]);
+          //printf("---\n");
+          LocalInicalizando = Locais[i].DadosLocal.ID;
+         // printf("Local atual: %s\n",Locais[LocalInicalizando].DadosLocal.Nome);
+          for (int k = 0; k < MAXDESTINOS; k++) {
+               //printf("Checando... %d\n",k);
+               if (Conexoes[LocalInicalizando][k] == CONECTADO) {
+                    //printf("Há um conectado: ");
+                    if (Locais[i].ConexaoID[e] != CONEXAO_NULA) {
+                         e++;
+                        // printf("Salto em E; ");
+                    }
+                    Locais[i].ConexaoID[e] = k;
+                   // printf("%d\n",Locais[i].ConexaoID[e]);
+               }   
+          }
+               //printf("Fim de cheagem\n");
+               //printf("%d %d %d\n",Locais[i].ConexaoID[0],Locais[i].ConexaoID[1],Locais[i].ConexaoID[2]);
+     }
+
+}
+
 
 int OpcoesLocal(int Local) {
      int OpcaoEscolhida = 0;
      printf("---\n");
-     char Opcoes[MAXDESTINOS][MAXOPCOES_MAIOR][25] = {{"Sair para a cidade","Salvar","Mudar baralho"},{"Voltar para a cidade","Entrar em uma dungeon","\0"},{"\0"},{"\0"}}; //Salva toda as opçoes disponiveis por lugar
 
      for (int i = 0; i < OpcoesQtd[Local];i++) {
-          if (strcmp(Opcoes[Local][i],"\0") != 0) printf("%d. %25s\n",i+1,Opcoes[Local][i]);
+          if (strcmp(LocalAtual->DadosLocal.Opcoes[i],"\0") != 0) printf("%d. %25s\n",i+1,LocalAtual->DadosLocal.Opcoes[i]);
      }
      printf("Qual opção?\n");
      scanf("%d",&OpcaoEscolhida);
@@ -30,10 +67,11 @@ int OpcoesLocal(int Local) {
 void OpcoesCasa(int Selecionada) {
      switch (Selecionada) {
      case SAIR_LOCAL:
-          printf("A porta tá fechada\n");
+          TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
      case SALVAR:
-          printf("Save não implementado\n");
+          printf("Encerrando\n");
+          Loop = 0;
           break;
      case MEXER_BARALHO:
           printf("Baralho lacrado\n");
@@ -43,7 +81,7 @@ void OpcoesCasa(int Selecionada) {
 void OpcoesDungeon(int Selecionada) {
      switch (Selecionada) {
      case SAIR_LOCAL:
-          printf("Voltaste");
+          TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
      case ENTRAR_DUNGEON:
           printf("Qual dungeon?\n");
@@ -54,7 +92,7 @@ void OpcoesDungeon(int Selecionada) {
 void OpcoesPraca(int Selecionada) {
      switch (Selecionada) {
      case SAIR_LOCAL:
-          printf("Voltaste");
+          TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
      case ENTRAR_DUNGEON:
           printf("Qual dungeon?\n");
@@ -65,12 +103,41 @@ void OpcoesPraca(int Selecionada) {
 void OpcoesTaberna(int Selecionada) {
      switch (Selecionada) {
      case SAIR_LOCAL:
-          printf("Voltaste");
+          TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
      case ENTRAR_DUNGEON:
           printf("Qual dungeon?\n");
           break;
      }
+}
+
+
+
+void TrocarDeLugar(int ID_Atual) {
+     int CaminhoEscolhido = CONEXAO_NULA;
+
+     LOCAL *Caminhos[MAXDESTINOS-1] = {NULL};
+     for (int i = 0; i < MAXDESTINOS-1; i++) {
+          if (LocalAtual->ConexaoID[i] != CONEXAO_NULA) {
+               Caminhos[i] = &Locais[LocalAtual->ConexaoID[i]];
+          }
+     }
+
+     for (int i = 0; i < MAXDESTINOS-1;i++) {
+          if (LocalAtual->ConexaoID[i] != CONEXAO_NULA) {
+               printf("%d. %30s\n",i+1,Caminhos[i]->DadosLocal.Nome);  
+          } 
+     }
+     printf("Para onde?");
+     do {
+          scanf("%d",&CaminhoEscolhido);
+          if (!(CaminhoEscolhido > 0 && CaminhoEscolhido < MAXDESTINOS)) {
+               printf("Opção inválida\n");
+          }
+          
+     } while (!(CaminhoEscolhido > 0 && CaminhoEscolhido < MAXDESTINOS));
+     LocalAtual = Caminhos[CaminhoEscolhido-1];
+
 }
 
 /* OPÇOES INICIAIS
@@ -108,3 +175,4 @@ Pede pra adicionar ou remover
      -Pergunta se quer tirar mais
 
 */
+
