@@ -35,7 +35,7 @@ typedef enum {
     ALAVANCA,
     SALA_BOSS,
     ENTRADA,
-    OBSTACULO,
+    OBSTACULO, //Ele nunca entrará numa sala do tipo obstáculo
     SEM_MOB,
 }Especiais;
 

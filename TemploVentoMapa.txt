@@ -1,120 +1,120 @@
      Sala 0,0
-\0
-\0 
-\0 
-\0 
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 0,1
-\0
-\0
-\0
-\0
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 0,2
 Há uma passagem para outro saguão, mais deteriorado que o primeiro.
-\0
+x
 Saguão deteriorado
 Corredor longo
-\0
+x
 0 1
      Sala 0,3
 O chão do saguão está com grandes rachaduras, o vento partia daqui... o que será que tem aqui em baixo para ter tanto vento?
-\0
+x
 Curva leste
-\0
+x
 Curva Oeste
 0 1
      Sala 0,4
 Este lugar parece meio deteriorado, só não quanto o caminho ao sul.
-\0
+x
+x
 Corredor deteriorado
-\0
 Saguão destruído
 6 1
      Sala 0,5
-\0
-\0
-\0
-\0
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 1,0
-Aqui o chão está cheio de escombros, folhas, sujeiras, e o que parece ser sujeira causada por aves. Há uma porta (ou o que restou dela) para outro saguão.
-\0
+Aqui o chão está cheio de escombros, folhas, sujeiras, e o que parece ser sujeira causada por aves. Há uma alavanca aqui.
+x
 Saguão sem teto
 Corredor longo
-\0
+x
 2 1
      Sala 1,1
-\0
-\0
-\0
-\0
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 1,2
 É um corredor meio longo, que seria bem escuro, se tivesse teto. Dá pra ouvir algumas aves por aqui.
 Curva
-\0
+x
 bifurcação
-\0
+x
 0 1
      Sala 1,3
-\0
-\0
-\0
-\0
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 1,4
 Um corredor muito detonado, parece que algo grande passou por aqui. Há um buraco muito grande na parede afrente.
-\0
+Acesso ao saguão
 Abertura grande
-\0
-\0
+x
+x
 6 1
      Sala 1,5
 Há um grande espaço aberto, até que uma rajada de vento enorme bate, sido causada por um grande vulto que apareceu na sua frente.
-\0
-\0
-\0
-\0
+x
+x
+x
+x
 3 1
      Sala 2,0
 Esta sala troca de corredores, e ela se encontra com alguns escombros pelo chão. Há uma porta aqui, parece ser possível de abrir
 Porta fechada
 Corredor leste
-\0
+x
 Caminho do sul
 0 1
      Sala 2,1
 As salas afrente estão muito iluminadas, parece que o teto alí foi arrancado, quebrou... não é possível dizer ao certo, mas explica muito do que há neste lugar.
-\0
+x
 Bifurcação
-\0
+x
 Curva do Caminho
 0 1
      Sala 2,2
 Há uma bifurcação aqui, além de alguns ninhos, deve ser pra compensar a falta de um teto nesta parte.
 Corredor longo
 Pequeno acesso
-\0
+x
 Corredor com teto
 0 1
      Sala 2,3
 Boa parte do teto está quebrada, talvez seja por isso tantas aves voando. Há uma porta aqui.
-\0
+x
 Porta fechada
-\0
+x
 Bifurcação
 0 1
      Sala 2,4
 Parece ser uma sala de controle destruída. Há outra alavanca no painel.
-\0
-\0
-\0
+x
+x
+x
 Acesso à sala
 2 1
      Sala 2,5
