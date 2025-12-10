@@ -1,4 +1,8 @@
-#include "explorardungeon.h"
+#if !defined(CIDADE_H)
+#define CIDADE_H
+
+#include "structs.h"
+#include "varglobal.h"
 #define MAXOPCOES_MAIOR 3
 #define MAXDESTINOS 4
 #define CONEXAO_NULA -1
@@ -18,8 +22,8 @@ enum Destinos {
 enum MaxOpcoes {
      CASA_OPT = 3,
      DUNGEON_OPT = 2,
-     PRACA_OPT = 0,
-     TABERNA_OPT = 0,
+     PRACA_OPT = 2,
+     TABERNA_OPT = 3,
 };
 
 enum Conexoes {
@@ -104,3 +108,5 @@ void (*OpcoesDeCadaLocal[MAXDESTINOS])(int Selecionada) = {
      OpcoesPraca,
      OpcoesTaberna,
 };
+
+#endif // CIDADE_H

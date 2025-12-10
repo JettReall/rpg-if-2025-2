@@ -5,15 +5,12 @@
 
 int main() {
      InicializarCidade();
-     LocalAtual = &Locais[CASA];
+     LocalAtual = &Locais[CASA]; //Ponto de inicio de andar na cidade
      while(Loop) {
           printf("%s\n",LocalAtual->DadosLocal.DescricaoLocal);
           OpcoesDeCadaLocal[LocalAtual->DadosLocal.ID](OpcoesLocal(LocalAtual->DadosLocal.ID)); //Ponteiro de função que acessa função referente ao local, imprime o que tem de lá e escolhe 
+          //ExplorarDungeon(AtivarDungeon);
      }
-     //Imprime as opções pra ele
-     //Escaneia o input
-     //Valida a opção
-     
 }
 
 void InicializarCidade() {
@@ -23,30 +20,20 @@ void InicializarCidade() {
           {N_CONECTADO,N_CONECTADO,CONECTADO,N_CONECTADO},
           {CONECTADO,CONECTADO,N_CONECTADO,CONECTADO},
           {CONECTADO,N_CONECTADO,CONECTADO,N_CONECTADO},
-     };
+     }; //Para validar e imprimir as conexões entre mapa
      int LocalInicalizando = 0;
 
-     //printf("Aberto inicializador %d\n", Locais[1].DadosLocal.ID);
      for (int i = 0; i < MAXDESTINOS;i++) {
           e=0;
-          //printf("%d %d %d|||",Locais[i].ConexaoID[0],Locais[i].ConexaoID[1],Locais[i].ConexaoID[2]);
-          //printf("---\n");
-          LocalInicalizando = Locais[i].DadosLocal.ID;
-         // printf("Local atual: %s\n",Locais[LocalInicalizando].DadosLocal.Nome);
-          for (int k = 0; k < MAXDESTINOS; k++) {
-               //printf("Checando... %d\n",k);
-               if (Conexoes[LocalInicalizando][k] == CONECTADO) {
-                    //printf("Há um conectado: ");
+          LocalInicalizando = Locais[i].DadosLocal.ID; //Local recebe o ID daquele lugar para comparar com os outros
+          for (int k = 0; k < MAXDESTINOS; k++) { //Roda a var Conexoes para ver se é conectado
+               if (Conexoes[LocalInicalizando][k] == CONECTADO) { //Se o local está preenchido, salta pro próximo
                     if (Locais[i].ConexaoID[e] != CONEXAO_NULA) {
                          e++;
-                        // printf("Salto em E; ");
                     }
-                    Locais[i].ConexaoID[e] = k;
-                   // printf("%d\n",Locais[i].ConexaoID[e]);
+                    Locais[i].ConexaoID[e] = k; //Se for conectado, ele salva o k, que, no momento, equivale ao ID do destino conectado
                }   
           }
-               //printf("Fim de cheagem\n");
-               //printf("%d %d %d\n",Locais[i].ConexaoID[0],Locais[i].ConexaoID[1],Locais[i].ConexaoID[2]);
      }
 
 }
@@ -58,6 +45,7 @@ int OpcoesLocal(int Local) {
 
      for (int i = 0; i < OpcoesQtd[Local];i++) {
           if (strcmp(LocalAtual->DadosLocal.Opcoes[i],"\0") != 0) printf("%d. %25s\n",i+1,LocalAtual->DadosLocal.Opcoes[i]);
+          //Compara se a string é vazia. Se for, imprime nada, mas se não for, imprime a opção disponivel para o lugar atual
      }
      printf("Qual opção?\n");
      scanf("%d",&OpcaoEscolhida);
@@ -99,17 +87,19 @@ void EntrarDungeon() {
           "do Vento","do Bosque","da Água","do Fogo",
      };
      for (int i = 0; i < TEMPLOS; i++) {
-          strcpy(NomePlaca,"Templo ");
-          strcat(NomePlaca,OutraParteNome[i]);
-          printf("%d. %20s\n",i+1,NomePlaca);
+          strcpy(NomePlaca,"Templo "); //Preenche/reseta a string para impressão
+          strcat(NomePlaca,OutraParteNome[i]); //concatena o sufixo
+          printf("%d. %20s\n",i+1,NomePlaca); //Imprime o nome completo
      }
           do {
                scanf("%d",&CaminhoDungeon);
-          } while (!(CaminhoDungeon > 0 && CaminhoDungeon <=TEMPLOS));
+               if (!(CaminhoDungeon > 0 && CaminhoDungeon <=TEMPLOS)) printf("Opção inválida\n");
+
+          } while (!(CaminhoDungeon > 0 && CaminhoDungeon <=TEMPLOS)); //Escaneia até liberar um número válido
           printf("Você seguiu o caminho até chegar na entrada da masmorra.\n");
-          if (DungeonsAbertas[CaminhoDungeon-1] == ABERTO) {
-               //ExplorarDungeon(CaminhoDungeon);
-               printf("Cheguei à dungeon\n");
+          if (DungeonsAbertas[CaminhoDungeon-1] == ABERTO) { //Checa se o lugar foi liberado
+               printf("Cheguei à dungeon\n"); 
+               AtivarDungeon = CaminhoDungeon; //Comando para ativar a dungeon
           } else {
                printf("Você caminha e encontra o templo trancado... não há muito o que fazer por agora\n");
                printf("Uma caminhada de volta, criticando o código de quem não pensou um jeito melhor de alertar o jogador, depois; você volta à placa\n");
@@ -133,7 +123,7 @@ void OpcoesTaberna(int Selecionada) {
           TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
      case CONVERSAR:
-          printf("Os que não se corromperam são os desmaiados de tanto beber.\n");
+          printf("Não é um encapuzado, o NPC se fundiu a cortina quando se corrompeu. Não dá para interagir com ele.\n");
           break;
      case LOJISTA:
           printf("O lojista está corrompido... Comprar algo com código duvidoso não parece uma escolha muito sábia.\n");
@@ -145,28 +135,30 @@ void OpcoesTaberna(int Selecionada) {
 
 void TrocarDeLugar(int ID_Atual) {
      int CaminhoEscolhido = CONEXAO_NULA;
+     int MaxCaminhos = 0;
 
      LOCAL *Caminhos[MAXDESTINOS-1] = {NULL};
      for (int i = 0; i < MAXDESTINOS-1; i++) {
-          if (LocalAtual->ConexaoID[i] != CONEXAO_NULA) {
+          if (LocalAtual->ConexaoID[i] != CONEXAO_NULA) { //Usa do ID previamente copiado para fazer Caminhos apontar para os caminhos válidos e possiveis
                Caminhos[i] = &Locais[LocalAtual->ConexaoID[i]];
           }
      }
 
      for (int i = 0; i < MAXDESTINOS-1;i++) {
           if (LocalAtual->ConexaoID[i] != CONEXAO_NULA) {
-               printf("%d. %30s\n",i+1,Caminhos[i]->DadosLocal.Nome);  
+               printf("%d. %30s\n",i+1,Caminhos[i]->DadosLocal.Nome);   //imprime caminhos não nulos
+               MaxCaminhos++;
           } 
      }
-     printf("Para onde?");
+     printf("Para onde?\n");
      do {
           scanf("%d",&CaminhoEscolhido);
-          if (!(CaminhoEscolhido > 0 && CaminhoEscolhido < MAXDESTINOS)) {
+          if (!(CaminhoEscolhido > 0 && CaminhoEscolhido <= MaxCaminhos)) { //faz o jogador apenas escolher um caminho válido
                printf("Opção inválida\n");
           }
           
-     } while (!(CaminhoEscolhido > 0 && CaminhoEscolhido < MAXDESTINOS));
-     LocalAtual = Caminhos[CaminhoEscolhido-1];
+     } while (!(CaminhoEscolhido > 0 && CaminhoEscolhido <= MaxCaminhos));
+     LocalAtual = Caminhos[CaminhoEscolhido-1]; //passa o local escolhido
 
 }
 
