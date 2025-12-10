@@ -62,8 +62,8 @@ void criar_ini_bosque()
     // INIMIGO 3
     strcpy(inimigo[DIFICIL].Nome, "Toco assombrado");
     inimigo[DIFICIL].Stat[HPMAX] = 30; inimigo[DIFICIL].Stat[DEFFIS] = 10; inimigo[DIFICIL].Stat[DEFMAG] = 15;
-    inimigo[DIFICIL].Stat[SPEED] = 0; inimigo[DIFICIL].Stat[ATQFIS] = 10; inimigo[DIFICIL].Stat[ATQMAG] = 15;
-    inimigo[DIFICIL].HpAtual = 30; inimigo[DIFICIL].Xp = 750;
+    inimigo[DIFICIL].Stat[SPEED] = 1; inimigo[DIFICIL].Stat[ATQFIS] = 10; inimigo[DIFICIL].Stat[ATQMAG] = 15;
+    inimigo[DIFICIL].HpAtual = 15; inimigo[DIFICIL].Xp = 750;
     strcpy(inimigo[DIFICIL].Habilidades[0].Nome, "Definhar");
     inimigo[DIFICIL].Habilidades[0].Tipo = 1; inimigo[DIFICIL].Habilidades[0].Valor = 15;
     strcpy(inimigo[DIFICIL].Habilidades[1].Nome, "Dilacerar");

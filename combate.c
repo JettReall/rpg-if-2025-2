@@ -399,7 +399,6 @@ int main(){
     { {0} }                  // Efeitos[10]
     };
     printf("declarou personagem\n");
-    printf("algo\n");
     criar_ini_bosque();
     INIMIGOS *inimigosc[4]={&inimigo[0],&inimigo[1],&inimigo[2],&inimigo[3]};
     printf("declarou inimigos\n");

@@ -80,10 +80,10 @@ void PrintBaralho(NO_BARALHO *b){
 }
 
 CARTA PuxarCarta(NO_BARALHO **baralho,int *qtd){
-    printf("funcao puxar carta\n");
+//    printf("funcao puxar carta\n");
     CARTA carta=(*baralho)->Carta;
     RetiraCarta(1,baralho,qtd);
-    printf("retirou uma carta\n");
+//    printf("retirou uma carta\n");
     return carta;
 }
 
