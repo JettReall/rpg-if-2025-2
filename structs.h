@@ -1,6 +1,7 @@
 #ifndef STRUCTS_H     // Se STRUCTS_H não está definido
 #define STRUCTS_H 
 
+#include "varglobal.h"
 //enuns:
 typedef enum {
     HPMAX,
@@ -69,14 +70,14 @@ typedef enum {
 
 typedef struct {
     char Nome[50];
-    char Descricao[200];
+    char Descricao[MAX_TAM_DESCRICAO];
     int Stat[7]; //status
     int Custo; //dinheiro
 }ITEM;
 
 typedef struct{
     char Nome[50];
-    char Descricao[200];
+    char Descricao[MAX_TAM_DESCRICAO];
     int Tipo,Valor;
 }CARTA;
 
@@ -127,7 +128,7 @@ typedef struct{
 }INIMIGOS;
 
 typedef struct{
-    char DescricaoSala[200];
+    char DescricaoSala[MAX_TAM_DESCRICAO];
     char Direcoes[4][30]; //Norte, Leste, Sul, Oeste
     int Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca...
     int Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
