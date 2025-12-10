@@ -118,135 +118,135 @@ Parece ser uma sala de controle destruída. Há outra alavanca no painel.
 Acesso à sala
 2 1
      Sala 2,5
-\0
-\0
-\0
-\0
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 3,0
 Tudo ao redor parece bem velho, mas dá pra ouvir fortes correntes de vento ecoando.
 Caminho bifurcado
 Corredor sinalizado
-\0
-\0
+x
+x
 0 1
      Sala 3,1
 As paredes do corredor estão rachadas e velhas, há cacos de vidro nos cantos, por causa das lâmpadas quebradas.
-\0
+x
 Acesso ao Saguão
-\0
+x
 Curva do corredor
 0 1
      Sala 3,2
 Um acesso, há uma faixa,ou o que sobrou dela, sinalizado um fluxo no chão.
-\0
-\0
+x
+x
 Saguão danificado
 Corredor
 0 1
      Sala 3,3
-\0
-\0
-\0
-\0
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 3,4
 Uma sala com algo que parecia um painel, que está soltantdo vento. Há uma alavanca que parece ainda funcionar.
-\0
-\0
+x
+x
 Corredor bifurcado
-\0
+x
 2 1
      Sala 3,5
-\0
-\0
-\0
-\0
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 4,0
-\0
-\0
-\0
-\0
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 4,1
 A maioria das coisas estão destruídas, sobrou apenas um caixote ileso.
-\0
-\0
+x
+x
 Acesso danificado
-\0
+x
 1 1
      Sala 4,2
 Há rachaduras no chão, deve ser da queda que isto levou, o vento saía daqui.
 Caminho sinalizado
-\0
+x
 Corredor para o estoque
-\0
+x
 5 1
      Sala 4,3
 Outra parte do corredor, o sol ilumina um pouco pelos muitos buracos do teto.
-\0
+x
 Corredor lateral
-\0
+x
 Entrada larga
 0 1
      Sala 4,4
 Um corredor longo cheio de lâmpadas quebradas, iluminada apenas pelas frestas da parede.
 Porta quebrada
 Garagem
-\0
+x
 Corredor lateral
 0 1
      Sala 4,5
 Há um grande espaço aqui, deveria ser uma espécie de garagem.
-\0
-\0
+x
+x
 Porta principal
 Corredor lateral
 0 1
      Sala 5,0
-\0
-\0
-\0
-\0
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 5,1
 As paredes e o chão se quebraram, taparam quase todas as portas.
 Porta do estoque
 Corredor para o Saguão
-\0
-\0
+x
+x
 5 1
      Sala 5,2
 Um corredor pequeno, mas do tamanho suficiente para passar carrinhos, o chão marcado prova isso.
 Saguão rachado
-\0
-\0
+x
+x
 Acesso ao estoque
 0 1
      Sala 5,3
-\0
-\0
-\0
-\0
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 5,4
-\0
-\0
-\0
-\0 
-\0
+x
+x
+x
+x
+x
 0 0
      Sala 5,5
 Um grande portão a sua frente, o que parece ser uma bugiganga voadora em ruína
 Porta principal
-\0
-\0
-\0
+x
+x
+x
 4 1

@@ -5,6 +5,7 @@
 #define LINHAS 6
 #define COLUNAS 6
 #define MAX_OPCOES_EXPLORAR 2
+#define DIRECAO 4
 
 
 #define EFEITO_VAZIO {"\0",0,0,0,0}
@@ -33,4 +34,5 @@ extern void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala);
 
 void Andar();
 void ValidarOpcaoSelecionada(int *Selecionada);
+void ChecarComAndar(int DirEscolhida,int Validado,int Calculo);
 

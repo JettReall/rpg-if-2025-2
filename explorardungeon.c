@@ -24,10 +24,10 @@ int main() {
      
      */
      do {
-          InteragirEmSala();
-          //Escolhe direção
-          //Entrar em sala
-     } while (1);
+          SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
+          //Encontro de batalha
+          InteragirEmSala(); //Envolve a parte da sala já vazia, escolher uma opção do que fazer na sala
+     } while (1);//A condição do While será o Hp do boss, mas como não foi integrado ainda, considerei o 1 para teste
      
      return 0;
 }
@@ -40,7 +40,7 @@ void AbrirArquivoDungeon(int Dungeon) {
      for(int i = 0; i < LINHAS; i++) {
           for(int j = 0; j < COLUNAS; j++) {
                // Pula a linha "Sala x,y"
-               if(fgets(buffer, sizeof(buffer), ArqPtr) == NULL) break;
+               if(fgets(buffer, sizeof(buffer), ArqPtr) == NULL) break;//Pega a linha descartável do arquivo
                
                lerSalaDoArquivo(ArqPtr, &DungeonAtual[i][j]);
                //Lê a informação de cada sala, primeiro as colunas, depois as linhas
@@ -89,35 +89,17 @@ void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala) {
      //Lê e limpa o buffer do \n no fim
      
      // Linha 2: 4 direções separadas por vírgula
-     for (int i = 0; i < 4; i++) {
+     for (int i = 0; i < DIRECAO; i++) {
           fgets(sala->Direcoes[i],sizeof(sala->Direcoes[i]),arquivo);
           sala->Direcoes[i][strcspn(sala->Direcoes[i], "\n")] = '\0';    
      }
-
-     // Remover espaços extras e quebras de linha
-     /*
-     for(int i = 0; i < 4; i++) {
-          // Remove leading spaces
-          char *start = sala->Direcoes[i];
-          while (*start == ' ') start++;
-          strcpy(sala->Direcoes[i], start);
-          
-          // Remove trailing spaces and newlines
-          int len = strlen(sala->Direcoes[i]);
-          while (len > 0 && (sala->Direcoes[i][len-1] == ' ' || sala->Direcoes[i][len-1] == '\n')) {
-               sala->Direcoes[i][len-1] = '\0';
-               len--;
-          }
-     */
-     
-     
+  
      // Linha 3: tipo especial e lugar válido
      fscanf(arquivo, "%d %d", &sala->Tipo_Especial, &sala->Lugar_Valido);
      fgets(buffer, sizeof(buffer), arquivo); // Consome a quebra de linha
 }
 
 void InteragirEmSala() {
-     SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
      int OpcaoSelecionada = 0;
      printf("%s\n",SalaAtual->DescricaoSala);
      printf("O que deseja fazer?\n");
@@ -147,10 +129,36 @@ void ValidarOpcaoSelecionada(int *Selecionada) {
 }
 
 void Andar() {
-     for (int i = 0; i < 4; i++) {
-          if (strcmp(SalaAtual->Direcoes[i],"\0") != 0) {// Mudar lógica
-               printf("%d. %30s\n",i,SalaAtual->Direcoes[i]); // Imprimir acessos
+     char DirecoesNome[DIRECAO][7] = {"Norte","Leste","Sul","Oeste"};
+     int DirecaoValorCalculo[DIRECAO] = {-COLUNAS,1,COLUNAS,-1};
+     int CalculoCoordX[DIRECAO] = {-1,0,1,0};
+     int CalculoCoordY[DIRECAO] = {0,1,0,-1};
+     int Validados[DIRECAO] = {0};
+     int DirecaoEscolhida;
+
+     MODELO_SALA_DUNGEON *ChecagemDeCaminhada = NULL; //ponteiro para checagem se  direção é válida
+     for (int i = 0; i < DIRECAO; i++) {
+          ChecagemDeCaminhada = SalaAtual; //Endereça a sala atual
+          ChecagemDeCaminhada+=DirecaoValorCalculo[i]; //Usa da aritmetica de ponteiros para dar saltos para ir para um adjacente. Ex.: Pro sul, o ponteiro salta exatamente para o que está abaixo de sala atual (Ptr+QtdColunas)
+          if (ChecagemDeCaminhada->Lugar_Valido == 1 && strcmp(SalaAtual->Direcoes[i],"x") != 0) {
+               printf("%d.%8s: %30s\n",i,DirecoesNome[i],SalaAtual->Direcoes[i]); // Imprimir acessos para salas válidas
+               Validados[i] = 1;
           };
      }
+     printf("Para onde ir?\n");
+     do {
+          scanf("%d",&DirecaoEscolhida);
+          if (Validados[DirecaoEscolhida] == 1) {
+               Coordenadas[X] += CalculoCoordX[DirecaoEscolhida]; //Passa as coordenadas para ser setado no próximo loop
+               Coordenadas[Y] += CalculoCoordY[DirecaoEscolhida];
+          } else {
+               printf("Caminho Inválido. Digite uma opção válida\n");
+          }
+     } while (Validados[DirecaoEscolhida] != 1);
+     
 }
+
+
+
+
 
