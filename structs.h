@@ -1,5 +1,7 @@
-#ifndef structs_H
-#define structs_H
+#ifndef STRUCTS_H     // Se STRUCTS_H não está definido
+#define STRUCTS_H 
+
+#include "varglobal.h"
 //enuns:
 typedef enum {
     HPMAX,
@@ -10,6 +12,11 @@ typedef enum {
     ATQMAG,
     NIVEL
 }Stats;
+
+enum Coordenadas {
+    X,
+    Y,
+};
 
 
 typedef enum{
@@ -27,7 +34,10 @@ typedef enum {
     NADA,
     BAU,
     ALAVANCA,
-    SALA_BOSS
+    SALA_BOSS,
+    ENTRADA,
+    OBSTACULO, //Ele nunca entrará numa sala do tipo obstáculo
+    SEM_MOB,
 }Especiais;
 
 typedef enum {
@@ -49,20 +59,37 @@ typedef enum {
     DIFICIL
 }Dificuldade;
 
+typedef enum {
+    NORTE,
+    LESTE,
+    SUL, 
+    OESTE,
+} DIRECOES;
 
+typedef enum {
+    CARREGAR,
+    JOGAR,
+    DIFICULDADE
+}MenuOp;
+
+typedef enum {
+    GUERREIRO,
+    MAGO,
+    SACERDOTE
+}MenuClasses;
 //-------------------------------------------------------------------------------------------------------------------
 //structs:
 
 typedef struct {
     char Nome[50];
-    char Descricao[200];
+    char Descricao[MAX_TAM_DESCRICAO];
     int Stat[7]; //status
     int Custo; //dinheiro
 }ITEM;
 
 typedef struct{
     char Nome[50];
-    char Descricao[200];
+    char Descricao[MAX_TAM_DESCRICAO];
     int Tipo,Valor;
 }CARTA;
 
@@ -79,7 +106,7 @@ typedef struct NO_BARALHO{ //baralho eh uma lista encadeada
 typedef struct{
     int UltimoSavepoint;
     CARTA Cartas[100];
-    int Dificuldade; //Facil = 5, Medio = 10, Dificil = 15;
+    int Dificuldade; 
     int Dinheiro;
 }SAVE_DADOS;
 
@@ -88,9 +115,6 @@ typedef struct {
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
     NO_BARALHO *Baralho; //baralho lista encadeada
-    ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
-    ITEM Inventario[6];//itens guardados quantidade ainda a decidir
-    EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
 }PERSONAGEM;
 
 typedef struct{
@@ -107,16 +131,14 @@ typedef struct{
     char Nome[50];//nome
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
-    ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
-    EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
     SKILL_INI Habilidades[2];
 }INIMIGOS;
 
 typedef struct{
-    char Nome[4][30];
-    char Direção[4]; //possibilidades de caminhos q o player pode ir, começa de cima, sentido horario.
-    Especiais Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca...
-    Valido Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
+    char DescricaoSala[MAX_TAM_DESCRICAO];
+    char Direcoes[4][30]; //Norte, Leste, Sul, Oeste
+    int Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca...
+    int Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
     INIMIGOS inimigos[4];//inimigos presentes no quarto
 }MODELO_SALA_DUNGEON;
 

@@ -7,10 +7,14 @@ INIMIGOS Inimigo_Nulo[1] = {0};
 void criar_ini_vento()
 {
     // Boss
-    strcpy(inimigo[BOSS].Nome, "Inimigo 1");
-    inimigo[BOSS].Stat[HPMAX] = 0; inimigo[BOSS].Stat[DEFFIS] = 0; inimigo[BOSS].Stat[DEFMAG] = 0;
-    inimigo[BOSS].Stat[SPEED] = 0; inimigo[BOSS].Stat[ATQFIS] = 0; inimigo[BOSS].Stat[ATQMAG] = 0;
-    inimigo[BOSS].Stat[NIVEL] = 0; inimigo[BOSS].HpAtual = 0; inimigo[BOSS].Xp = 0;
+    strcpy(inimigo[BOSS].Nome, "Harpia");
+    inimigo[BOSS].Stat[HPMAX] = 50; inimigo[BOSS].Stat[DEFFIS] = 15; inimigo[BOSS].Stat[DEFMAG] = 15;
+    inimigo[BOSS].Stat[SPEED] = 10; inimigo[BOSS].Stat[ATQFIS] = 25; inimigo[BOSS].Stat[ATQMAG] = 25;
+    inimigo[BOSS].HpAtual = 50; inimigo[BOSS].Xp = 1500;
+    strcpy(inimigo[BOSS].Habilidades[0].Nome, "Dilacerar");
+    inimigo[BOSS].Habilidades[0].Tipo = ATAQUEFIS; inimigo[BOSS].Habilidades[0].Valor = 20;
+    strcpy(inimigo[BOSS].Habilidades[1].Nome, "Hipoxia");
+    inimigo[BOSS].Habilidades[1].Tipo = ATAQUEMAG; inimigo[BOSS].Habilidades[0].Valor = 30;
 
     // INIMIGO 1
     strcpy(inimigo[FACIL].Nome, "Falcao");
@@ -33,14 +37,14 @@ void criar_ini_vento()
     inimigo[MEDIO].Habilidades[1].Tipo = ATAQUEFIS; inimigo[MEDIO].Habilidades[0].Valor = 10;
 
     // INIMIGO 3
-    strcpy(inimigo[DIFICIL].Nome, "Harpia");
+    strcpy(inimigo[DIFICIL].Nome, "HipoGrifo");
     inimigo[DIFICIL].Stat[HPMAX] = 20; inimigo[DIFICIL].Stat[DEFFIS] = 10; inimigo[DIFICIL].Stat[DEFMAG] = 15;
-    inimigo[DIFICIL].Stat[SPEED] = 20; inimigo[DIFICIL].Stat[ATQFIS] = 20; inimigo[DIFICIL].Stat[ATQMAG] = 10;
-    inimigo[DIFICIL].HpAtual = 30; inimigo[DIFICIL].Xp = 500;
-    strcpy(inimigo[MEDIO].Habilidades[0].Nome, "Rasgar");
-    inimigo[MEDIO].Habilidades[0].Tipo = ATAQUEMAG; inimigo[MEDIO].Habilidades[0].Valor = 10;
-    strcpy(inimigo[MEDIO].Habilidades[1].Nome, "Rajada de Vento");
-    inimigo[MEDIO].Habilidades[1].Tipo = ATAQUEMAG; inimigo[MEDIO].Habilidades[0].Valor = 10;
+    inimigo[DIFICIL].Stat[SPEED] = 10; inimigo[DIFICIL].Stat[ATQFIS] = 10; inimigo[DIFICIL].Stat[ATQMAG] = 10;
+    inimigo[DIFICIL].HpAtual = 20; inimigo[DIFICIL].Xp = 500;
+    strcpy(inimigo[MEDIO].Habilidades[0].Nome, "Bicar");
+    inimigo[MEDIO].Habilidades[0].Tipo = ATAQUEFIS; inimigo[MEDIO].Habilidades[0].Valor = 10;
+    strcpy(inimigo[MEDIO].Habilidades[1].Nome, "Coice");
+    inimigo[MEDIO].Habilidades[1].Tipo = ATAQUEFIS; inimigo[MEDIO].Habilidades[0].Valor = 15;
 
 }
 void criar_ini_bosque()
