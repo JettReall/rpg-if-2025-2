@@ -2,3 +2,4 @@
 #define max_inimigo_sala 4 // Quantia max de inimigo que pode ter por sala.
 #define max_array_inimigo 20
 #define modificador 5
+#define MAX_TAM_DESCRICAO 200

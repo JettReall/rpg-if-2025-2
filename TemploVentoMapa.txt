@@ -1,0 +1,252 @@
+     Sala 0,0
+x
+x
+x
+x
+x
+0 0
+     Sala 0,1
+x
+x
+x
+x
+x
+0 0
+     Sala 0,2
+Há uma passagem para outro saguão, mais deteriorado que o primeiro.
+x
+Saguão deteriorado
+Corredor longo
+x
+0 1
+     Sala 0,3
+O chão do saguão está com grandes rachaduras, o vento partia daqui... o que será que tem aqui em baixo para ter tanto vento?
+x
+Curva leste
+x
+Curva Oeste
+0 1
+     Sala 0,4
+Este lugar parece meio deteriorado, só não quanto o caminho ao sul.
+x
+x
+Corredor deteriorado
+Saguão destruído
+6 1
+     Sala 0,5
+x
+x
+x
+x
+x
+0 0
+     Sala 1,0
+Aqui o chão está cheio de escombros, folhas, sujeiras, e o que parece ser sujeira causada por aves. Há uma alavanca aqui.
+x
+Saguão sem teto
+Corredor longo
+x
+2 1
+     Sala 1,1
+x
+x
+x
+x
+x
+0 0
+     Sala 1,2
+É um corredor meio longo, que seria bem escuro, se tivesse teto. Dá pra ouvir algumas aves por aqui.
+Curva
+x
+bifurcação
+x
+0 1
+     Sala 1,3
+x
+x
+x
+x
+x
+0 0
+     Sala 1,4
+Um corredor muito detonado, parece que algo grande passou por aqui. Há um buraco muito grande na parede afrente.
+Acesso ao saguão
+Abertura grande
+x
+x
+6 1
+     Sala 1,5
+Há um grande espaço aberto, até que uma rajada de vento enorme bate, sido causada por um grande vulto que apareceu na sua frente.
+x
+x
+x
+x
+3 1
+     Sala 2,0
+Esta sala troca de corredores, e ela se encontra com alguns escombros pelo chão. Há uma porta aqui, parece ser possível de abrir
+Porta fechada
+Corredor leste
+x
+Caminho do sul
+0 1
+     Sala 2,1
+As salas afrente estão muito iluminadas, parece que o teto alí foi arrancado, quebrou... não é possível dizer ao certo, mas explica muito do que há neste lugar.
+x
+Bifurcação
+x
+Curva do Caminho
+0 1
+     Sala 2,2
+Há uma bifurcação aqui, além de alguns ninhos, deve ser pra compensar a falta de um teto nesta parte.
+Corredor longo
+Pequeno acesso
+x
+Corredor com teto
+0 1
+     Sala 2,3
+Boa parte do teto está quebrada, talvez seja por isso tantas aves voando. Há uma porta aqui.
+x
+Porta fechada
+x
+Bifurcação
+0 1
+     Sala 2,4
+Parece ser uma sala de controle destruída. Há outra alavanca no painel.
+x
+x
+x
+Acesso à sala
+2 1
+     Sala 2,5
+x
+x
+x
+x
+x
+0 0
+     Sala 3,0
+Tudo ao redor parece bem velho, mas dá pra ouvir fortes correntes de vento ecoando.
+Caminho bifurcado
+Corredor sinalizado
+x
+x
+0 1
+     Sala 3,1
+As paredes do corredor estão rachadas e velhas, há cacos de vidro nos cantos, por causa das lâmpadas quebradas.
+x
+Acesso ao Saguão
+x
+Curva do corredor
+0 1
+     Sala 3,2
+Um acesso, há uma faixa,ou o que sobrou dela, sinalizado um fluxo no chão.
+x
+x
+Saguão danificado
+Corredor
+0 1
+     Sala 3,3
+x
+x
+x
+x
+x
+0 0
+     Sala 3,4
+Uma sala com algo que parecia um painel, que está soltantdo vento. Há uma alavanca que parece ainda funcionar.
+x
+x
+Corredor bifurcado
+x
+2 1
+     Sala 3,5
+x
+x
+x
+x
+x
+0 0
+     Sala 4,0
+x
+x
+x
+x
+x
+0 0
+     Sala 4,1
+A maioria das coisas estão destruídas, sobrou apenas um caixote ileso.
+x
+x
+Acesso danificado
+x
+1 1
+     Sala 4,2
+Há rachaduras no chão, deve ser da queda que isto levou, o vento saía daqui.
+Caminho sinalizado
+x
+Corredor para o estoque
+x
+5 1
+     Sala 4,3
+Outra parte do corredor, o sol ilumina um pouco pelos muitos buracos do teto.
+x
+Corredor lateral
+x
+Entrada larga
+0 1
+     Sala 4,4
+Um corredor longo cheio de lâmpadas quebradas, iluminada apenas pelas frestas da parede.
+Porta quebrada
+Garagem
+x
+Corredor lateral
+0 1
+     Sala 4,5
+Há um grande espaço aqui, deveria ser uma espécie de garagem.
+x
+x
+Porta principal
+Corredor lateral
+0 1
+     Sala 5,0
+x
+x
+x
+x
+x
+0 0
+     Sala 5,1
+As paredes e o chão se quebraram, taparam quase todas as portas.
+Porta do estoque
+Corredor para o Saguão
+x
+x
+5 1
+     Sala 5,2
+Um corredor pequeno, mas do tamanho suficiente para passar carrinhos, o chão marcado prova isso.
+Saguão rachado
+x
+x
+Acesso ao estoque
+0 1
+     Sala 5,3
+x
+x
+x
+x
+x
+0 0
+     Sala 5,4
+x
+x
+x
+x
+x
+0 0
+     Sala 5,5
+Um grande portão a sua frente, o que parece ser uma bugiganga voadora em ruína
+Porta principal
+x
+x
+x
+4 1

@@ -1,0 +1,84 @@
+# ============ ARQUIVOS COMPILADOS/EXECUTÁVEIS ============
+*.exe
+*.dll
+*.so
+*.dylib
+*.app
+*.out
+*.bin
+
+# ============ ARQUIVOS DE BUILD/COMPILAÇÃO ============
+[Bb]uild/
+[Dd]ist/
+[Oo]bj/
+[Bb]in/
+*.o
+*.obj
+*.class
+*.jar
+*.war
+
+# ============ ARQUIVOS DE SISTEMA/IDE ============
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+~$
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Visual Studio
+.vs/
+*.vcxproj
+*.vcxproj.filters
+*.sln
+
+# ============ ARQUIVOS DE CONFIGURAÇÃO LOCAL ============
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.config.local
+config.ini
+secrets.ini
+
+# ============ LOGS E TEMPORÁRIOS ============
+*.log
+logs/
+[Tt]emp/
+[Tt]mp/
+
+# ============ ASSETS/PROJETO ESPECÍFICO ============
+# Para Unity
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# Para Unreal Engine
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+*.opensdf
+*.sdf
+*.sln
+*.suo
+*.xcodeproj
+*.xcworkspace
+
+# ============ BACKUPS ============
+*.bak
+*.backup
+*.old
+_Backups/
