@@ -126,7 +126,7 @@ void InterfacePlayer(PERSONAGEM player,CARTA mao[6],int turno){
             contador++;
         }
     }
-    printf("\nQuantas Cartas deseja jogar?Ou (10) para recarregar o baralho\n");
+    printf("\nQuantas Cartas deseja jogar(MAX 3)?Ou (10) para recarregar o baralho\n");
 }
 
 void EscolheAlvo(INIMIGOS inimigos[4],int *alvo){
