@@ -163,6 +163,7 @@ void criar_ini_nulo()
 {
     strcpy(Inimigo_Nulo[0].Nome, "Dummy");
     Inimigo_Nulo[0].Stat[HPMAX] = -1;
+    Inimigo_Nulo[0].HpAtual = -1;
     strcpy(inimigo[0].Habilidades[0].Nome, "Nula");
     inimigo[0].Habilidades[0].Tipo = ATAQUEFIS; inimigo[0].Habilidades[0].Valor = 0;
     strcpy(inimigo[0].Habilidades[1].Nome, "Nula");
