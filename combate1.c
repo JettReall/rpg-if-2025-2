@@ -7,8 +7,8 @@
 #include "baralho.h"
 #include "inimigos.h"
 
-CARTA fis1={"fisico1 teste","",ATAQUEFIS,10};
-CARTA mag1={"magico1 teste","",ATAQUEMAG,10};
+CARTA fis1={"fisico1 teste","",ATAQUEFIS,8};
+CARTA mag1={"magico1 teste","",ATAQUEMAG,8};
 CARTA cura1={"cura1 teste","",CURA,5};
 CARTA cartanula={"Nulo","Nulo",-1,0};
 DADOS_BATALHA dadosbaralho={8,8,0};
