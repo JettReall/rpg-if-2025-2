@@ -120,7 +120,6 @@ typedef struct {
     char Nome[50];//nome
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
-    NO_BARALHO *Baralho; //baralho lista encadeada
 }PERSONAGEM;
 
 typedef struct{
