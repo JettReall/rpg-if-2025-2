@@ -13,7 +13,7 @@ CARTA cura1={"cura1 teste","",CURA,5};
 CARTA cartanula={"Nulo","Nulo",-1,0};
 DADOS_BATALHA dadosbaralho={8,8,0};
 
-typedef struct dano{
+typedef struct{
     int danofis;
     int danomag;
     int cura;
@@ -320,14 +320,12 @@ int main(){
 //    printf("Entrou no main\n");
     DADOS_BATALHA dadosbaralho={8,8,0};
     PERSONAGEM player = {
-    "personagem demo",       // Nome
-    {200,5,5,10,10,10,1},     // Stat[7]
+    "personagem demo",        // Nome
+    {200, 5, 5, 10, 10, 10, 1}, // Stat[7]
     200,                      // HpAtual
-    0,                       // Xp
-    { {0}, {0} },            // Equipados[2]
-    { {0} },                 // Inventario[6]  (isso inicializa todos com zero)
-    { {0} }                  // Efeitos[10]
+    0                         // Xp
     };
+
 //    printf("declarou personagem\n");
     criar_ini_bosque();
     //INIMIGOS *inimigosc[4]={&inimigo[0],&inimigo[1],&inimigo[2],&inimigo[3]};
