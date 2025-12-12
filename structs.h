@@ -26,11 +26,6 @@ typedef enum{
 }Tipo;
 
 typedef enum {
-    DANO,
-    STATMOD
-}Efeito_Tipos;
-
-typedef enum {
     NADA,
     BAU,
     ALAVANCA,
@@ -92,11 +87,6 @@ typedef struct{
     char Descricao[MAX_TAM_DESCRICAO];
     int Tipo,Valor;
 }CARTA;
-
-typedef struct {  //efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
-    char Nome[50];
-    int Tipo,Valor,Stat,Contador;
-}EFEITO;
 
 typedef struct NO_BARALHO{ //baralho eh uma lista encadeada
     CARTA Carta;    //carta eh um struct carta
