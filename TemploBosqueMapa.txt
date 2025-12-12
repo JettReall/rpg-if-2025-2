@@ -1,0 +1,20 @@
+     Sala 1
+Descrição da sala
+Nada, NAda, porta muio velha, Maconha
+0 0
+     Sala 2
+Outra
+n, n, n, pq
+1 1
+     Sala 3
+Outras
+na, nsd, na, pq
+1 0
+     Sala 4
+Outraz
+no, no, no, pq
+0 1
+     Sala 5
+Oddssutra
+na, na, an, pq
+0 0
