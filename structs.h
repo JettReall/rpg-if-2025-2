@@ -110,6 +110,12 @@ typedef struct{
     int Dinheiro;
 }SAVE_DADOS;
 
+typedef struct{
+    int QtdCartaAtual;
+    int QtdCartaTotal;
+    int QtdCartamaoatual;
+}DADOS_BATALHA;
+
 typedef struct {
     char Nome[50];//nome
     int Stat[7];//stats max
