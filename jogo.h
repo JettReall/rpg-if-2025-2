@@ -8,3 +8,4 @@ int Escolhedificuldade();
 void TestaSave();
 void EscolheClasse();
 void Comeca_Jogo();
+void AperteBotaoParaPular();

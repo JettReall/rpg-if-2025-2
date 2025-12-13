@@ -131,7 +131,7 @@ typedef struct{
     char Nome[50];//nome
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
-    SKILL_INI Habilidades[2];
+    SKILL_INI Habilidades[MAX_HABILIDADES];
 }INIMIGOS;
 
 typedef struct{
@@ -139,7 +139,7 @@ typedef struct{
     char Direcoes[4][30]; //Norte, Leste, Sul, Oeste
     int Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca...
     int Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
-    INIMIGOS inimigos[4];//inimigos presentes no quarto
+    INIMIGOS inimigos[max_inimigo_sala];//inimigos presentes no quarto
 }MODELO_SALA_DUNGEON;
 
 #endif

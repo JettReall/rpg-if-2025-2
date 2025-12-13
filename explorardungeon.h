@@ -1,6 +1,6 @@
 
 #include "criardungeons.h"
-#include "Varglobal.h"
+#include "varglobal.h"
 #include "structs.h"
 #define LINHAS 6
 #define COLUNAS 6
@@ -11,9 +11,43 @@
 #define MAX_ALAVANCAS 3
 
 
-#define EFEITO_VAZIO {"\0",0,0,0,0}
-#define ITEM_VAZIO {"\0","\0",{0},0}
-#define SALA_VAZIA {"\0",{"\0"},NADA,INVALIDO,{INIMIGO_VAZIO}}
+static const ITEM ItemVazio = {
+    .Nome = "\0",
+    .Descricao = "\0",
+    .Stat = {0},
+    .Custo =0,
+};
+
+static const SKILL_INI SkillVazia ={
+    .Nome = "\0",
+    .Tipo = 0,
+    .Valor = 0,
+};
+
+static const EFEITO EfeitoVazio = {
+     .Nome = "\0",
+     .Contador =0,
+     .Stat = 0,
+     .Tipo =0,
+     .Valor = 0,
+};
+
+
+INIMIGOS InimigoVazio = {
+     .Nome = "\0",
+     .HpAtual = 0,
+     .Stat = {0},
+     .Xp = 0,
+
+};
+
+MODELO_SALA_DUNGEON SALA_VAZIA = {
+     .DescricaoSala = "\0",
+     .Direcoes = {"\0"},
+     .Tipo_Especial = NADA,
+     .Lugar_Valido = INVALIDO,
+};
+
 
 enum OpcoesMenu {
      CAMINHAR = 1,
@@ -43,7 +77,7 @@ typedef struct {
 } SALAS_ALAVANCA;
 
 
-const INIMIGOS InimigoVazio = {"\0",{0},0,0,{ITEM_VAZIO},{EFEITO_VAZIO}};
+
 MODELO_SALA_DUNGEON DungeonAtual[LINHAS][COLUNAS];
 MODELO_SALA_DUNGEON *SalaAtual = NULL;
 
@@ -75,6 +109,7 @@ SALAS_ALAVANCA AlavancasDungeon[MAX_ALAVANCAS] = {0,0,NAO_ATIVADO,NULL};
 
 int Coordenadas[2] = {0};
 int AlavancasQtd = 0;
+int FlagSaida = 0;
 
 FILE *ArqPtr = NULL;
 
@@ -87,4 +122,5 @@ void ValidarOpcaoSelecionada(int *Selecionada);
 void EfeitoDeSala(int TipoDeSala);
 void ChecarComAndar(int DirEscolhida,int Validado,int Calculo);
 extern void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala);
+void IniciarPlaceholder();
 

@@ -5,14 +5,14 @@
 
 
 int main() {
+     IniciarPlaceholder();
      AbrirArquivoDungeon(VENTO); //USa de um switch para abrir o arquivo correto
     
      do {
-          printf("-----------%d,%d-----------\n",Coordenadas[X],Coordenadas[Y]);
           SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
           //Encontro de batalha
           InteragirEmSala(); //Envolve a parte da sala já vazia, escolher uma opção do que fazer na sala
-     } while (1);//A condição do While será o Hp do boss, mas como não foi integrado ainda, considerei o 1 para teste
+     } while (FlagSaida != 1);//A condição do While será o Hp do boss, mas como não foi integrado ainda, considerei o 1 para teste
      
      return 0;
 }
@@ -111,6 +111,10 @@ void ImprimirOpcoes() {
                printf("(Puxar alavanca)\n");
           }
      };
+
+     if (SalaAtual->Tipo_Especial == ENTRADA) {
+          printf("2. Sair\n");
+     }
 }
 
 
@@ -122,6 +126,9 @@ void ValidarOpcaoSelecionada(int *Selecionada) {
           case INTERAGIR:
                if ((SalaAtual->Tipo_Especial == BAU || SalaAtual->Tipo_Especial == ALAVANCA)) {
                     EfeitoDeSala(SalaAtual->Tipo_Especial);
+               } else if (SalaAtual->Tipo_Especial == ENTRADA) {
+                    printf("Você dá meia volta e vai embora.\n");
+                    FlagSaida = 1;
                } else {
                     printf("Não há nada para interagir\n");
                }
@@ -202,7 +209,15 @@ void Andar() {
      
 }
 
+void IniciarPlaceholder() {
+     for (int i = 0; i < MAX_HABILIDADES; i++) {
+          InimigoVazio.Habilidades[i] = SkillVazia;
+     }
 
+     for (int i = 0; i < max_inimigo_sala; i++) {
+          SALA_VAZIA.inimigos[i] = InimigoVazio;
+     }
+}
 
 
 
