@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "explorardungeon.h"
-
+#include "criardungeons.h"
+#include "inimigos.h"
 
 int main() {
      IniciarPlaceholder();
@@ -10,9 +11,15 @@ int main() {
     
      do {
           SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
-          //Encontro de batalha
+          if (SalaAtual->inimigos[0].HpAtual > 0){
+               //Encontro de batalha
+          } else {
+               if ((SalaAtual->inimigos[BOSS].HpAtual) <= 0) {
+                    FlagSaida = 1;
+               }
+          }
           InteragirEmSala(); //Envolve a parte da sala já vazia, escolher uma opção do que fazer na sala
-     } while (FlagSaida != 1);//A condição do While será o Hp do boss, mas como não foi integrado ainda, considerei o 1 para teste
+     } while (FlagSaida != 1);//A condição do While será o Hp do boss, mas como não foi integrado ainda, considerei o 1 para teste;//A condição do While será o Hp do boss.
      
      return 0;
 }
@@ -49,15 +56,23 @@ int InicializarDungeon(int DungeonEscolhida) {
      case VENTO:
           ArqPtr = fopen("TemploVentoMapa.txt","r");
           AlavancasQtd = ALAVANCAS_VENTO;
+          Escolhemapa(DungeonEscolhida);
+          CriarDungeon(mapa, DIFICIL, DungeonEscolhida);
           break;
      case BOSQUE:
           ArqPtr = fopen("TemploBosqueMapa.txt","r");
+          Escolhemapa(DungeonEscolhida);
+          CriarDungeon(mapa, DIFICIL, DungeonEscolhida);
           break;
      case AGUA:
           ArqPtr = fopen("TemploAguaMapa.txt","r");
+          Escolhemapa(DungeonEscolhida);
+          CriarDungeon(mapa, DIFICIL, DungeonEscolhida);
           break;
      case FOGO:
           ArqPtr = fopen("TemploFogoMapa.txt","r");
+          Escolhemapa(DungeonEscolhida);
+          CriarDungeon(mapa, DIFICIL, DungeonEscolhida);
           break;
 }
 
