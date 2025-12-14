@@ -8,6 +8,7 @@
 int main(int Escolhida) {
      IniciarPlaceholder();
      AbrirArquivoDungeon(Escolhida); //USa de um switch para abrir o arquivo correto
+     CriarDungeon(DungeonAtual, DIFICIL, Escolhida);
   
      do {
           SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
@@ -30,7 +31,7 @@ int main(int Escolhida) {
 
 void AbrirArquivoDungeon(int Dungeon) {
      char buffer[256];
-
+     
      InicializarDungeon(Dungeon); //Chama primeiro o incializador para abrir o arquivo correto
 
      for(int i = 0; i < LINHAS; i++) {
@@ -54,7 +55,6 @@ void AbrirArquivoDungeon(int Dungeon) {
                }
           }  
      }
-     CriarDungeon(DungeonAtual, DIFICIL, Dungeon);
 }
 
 int InicializarDungeon(int DungeonEscolhida) {

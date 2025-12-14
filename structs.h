@@ -53,7 +53,7 @@ typedef enum {
     FACIL,
     MEDIO,
     DIFICIL,
-    MOB_NULO = 0,
+    MOB_NULO = 4,
 }Dificuldade;
 
 typedef enum {

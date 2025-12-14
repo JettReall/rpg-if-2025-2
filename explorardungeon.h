@@ -4,8 +4,6 @@
 #include "varglobal.h"
 #include "structs.h"
 #include "criardungeons.h"
-#define LINHAS 6
-#define COLUNAS 6
 #define MAX_OPCOES_EXPLORAR 2
 #define DIRECAO 4
 
@@ -101,7 +99,6 @@ void Andar();
 void ValidarOpcaoSelecionada(int *Selecionada);
 void EfeitoDeSala(int TipoDeSala);
 void ChecarComAndar(int DirEscolhida,int Validado,int Calculo);
-extern void CriarDungeon(MODELO_SALA_DUNGEON mapa[6][6], int dificuldade, int tipodungeon);
 extern void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala);
 void ValidaInteracao(int Interacao);
 void IniciarPlaceholder();

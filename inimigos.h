@@ -2,7 +2,7 @@
 #define INIMIGOS_H
 #include "structs.h"
 
-INIMIGOS inimigo[max_inimigo_sala] = {0};
+INIMIGOS inimigo[max_inimigo_sala] = {0}; 
 const INIMIGOS Inimigo_Nulo = {
     .Nome = "Dummy",
     .Xp =0,
@@ -11,6 +11,8 @@ const INIMIGOS Inimigo_Nulo = {
     .Habilidades[1] = {.Nome = "Nula",.Tipo = NULO,.Valor = NULO},
 };
 
+
+//Inimigo_Nulo;
 
 INIMIGOS CatalogoVento[max_inimigo_Dungeon] = {
     [BOSS] = {

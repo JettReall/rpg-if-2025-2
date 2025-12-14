@@ -6,36 +6,49 @@
 #include "varglobal.h"
 #include "criardungeons.h"
 
-void CriarDungeon(MODELO_SALA_DUNGEON mapa[6][6], int dificuldade, int tipodungeon){
-    static int  arr_dificuldade[max_array_inimigo] = {0};
+void CriarDungeon(MODELO_SALA_DUNGEON mapa[LINHAS][COLUNAS], int dificuldade, int tipodungeon){
+    int arr_dificuldade[DIFICULDADES];
     srand(time(NULL));
     SelecionaInimigosDungeon(tipodungeon);
     CriaSalaBoss();
     DificuldadeDungeon(arr_dificuldade, dificuldade);
 
-    int inimigos_max = 0, x = 0, y = 0, z = 0, temp = 0;
-    while (inimigos_max < dificuldade * tipodungeon * modificador)  {
-        if (temp < max_inimigo_sala) {
-
-            if (mapa[x][y].Tipo_Especial == NADA && mapa[x][y].Lugar_Valido == VALIDO) {
-
-                z = rand() % max_array_inimigo;
-                if (arr_dificuldade[z] == BOSS) {
-                    mapa[x][y].inimigos[temp] = Inimigo_Nulo;
-                    temp++; 
-                    continue;
+     int InimigoEscolhido = 0, ChanceDeSpawn = 0, SlotInimigo = 0;
+     int DifEscolhida = 0;
+     int inimigos_max = dificuldade * tipodungeon * modificador;
+     int X_Valido[TOTAL_SALAS] = {NULO};
+     int Y_Valido[TOTAL_SALAS] = {NULO};
+     int SalasValidas = 0;
+     int X_Atual= 0, Y_Atual = 0;
+    
+    for (int x = 0; x < LINHAS; x++) {
+            for (int y = 0; y < COLUNAS; y++) {
+                if (mapa[x][y].Tipo_Especial == NADA && mapa[x][y].Lugar_Valido == VALIDO) {
+                    X_Valido[SalasValidas] = x;
+                    Y_Valido[SalasValidas] = y;
+                    SalasValidas++;
                 }
-                mapa[x][y].inimigos[temp] = inimigo[arr_dificuldade[z]];
-                inimigos_max += arr_dificuldade[z];
-                temp++;
-
-            } else temp = max_inimigo_sala;
-
-        } else temp = 0, y++;
-        if (y == 6) x++, y = 0;
-        if (x == 6) break;
+            }
     }
 
+    while (inimigos_max > 0)  {
+           for (int i = 0; i < SalasValidas; i++) {
+                X_Atual = X_Valido[i];
+                Y_Atual = Y_Valido[i];
+                ChanceDeSpawn = (rand() % 100) + 1;
+                if (ChanceDeSpawn <= CHANCE_SPAWN) {
+                    DifEscolhida = rand() % CHANCE_TOTAL_SPAWN;
+                    InimigoEscolhido = PoeInimigoPorDificuldade(DifEscolhida,arr_dificuldade);
+                    if (InimigoEscolhido == MOB_NULO) {
+                        continue;
+                    } else {
+                        mapa[X_Atual][Y_Atual].inimigos[SlotInimigo] = inimigo[InimigoEscolhido];
+                        inimigos_max--;
+                    }
+                }
+           } 
+           SlotInimigo++;
+    }
 }
 
 void SelecionaInimigosDungeon(int tipodungeon) {
@@ -70,39 +83,43 @@ void CriaSalaBoss() {
 }
 
 void DificuldadeDungeon(int arr_dificuldade[], int dificuldade) {  
-    int ApareceFacil = 0, ApareceMedio = 0, ApareceDificil = 0;
+    
     switch (dificuldade) {
     case FACIL:
-        ApareceFacil = 6; ApareceMedio = 3; ApareceDificil = 1;
+        arr_dificuldade[FACIL-1] = 6;
+        arr_dificuldade[MEDIO-1] = 3;
+        arr_dificuldade[DIFICIL-1] = 1;
         break;
     case MEDIO:
-        ApareceFacil = 4; ApareceMedio = 6; ApareceDificil = 3;
+        arr_dificuldade[FACIL-1] = 4;
+        arr_dificuldade[MEDIO-1] = 6;
+        arr_dificuldade[DIFICIL-1] = 3;
         break;
     case DIFICIL:
-        ApareceFacil = 2; ApareceMedio = 8; ApareceDificil = 6;
+        arr_dificuldade[FACIL-1] = 2;
+        arr_dificuldade[MEDIO-1] = 8;
+        arr_dificuldade[DIFICIL-1] = 6;
         break;
     default:
         printf("Erro na dificuldade.");
         break;
     }
-    PreencheArray(arr_dificuldade, ApareceFacil, ApareceMedio, ApareceDificil);
 }
 
-void PreencheArray(int arr[], int Numero_Ini_F, int Numero_Ini_M, int Numero_Ini_D)
-{
-    int temp = 0;
-    for (int i = 0; i < Numero_Ini_F ; i++) {
-        arr[temp] = FACIL;
-        temp++;
-    }
+int PoeInimigoPorDificuldade(int Dif,int arr[]) {
+    int Facil =arr[FACIL];
+    int Medio = arr[MEDIO];
+    int Dificil = arr[DIFICIL];
 
-    for (int i = 0; i < Numero_Ini_M ; i++) {
-        arr[temp] = MEDIO;
-        temp++;
-    }
+    Medio += Facil;
+    Dificil += Medio;
 
-    for (int i = 0; i < Numero_Ini_D ; i++) {
-        arr[temp] = DIFICIL;
-        temp++;
-    }
+    if (Dif <= Facil) {
+        return FACIL;
+    } else if (Dif <= Medio) {
+        return MEDIO;
+    } else if (Dif <= Dificil) {
+        return DIFICIL;
+    } 
+    return MOB_NULO;
 }
