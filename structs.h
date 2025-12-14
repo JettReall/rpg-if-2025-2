@@ -23,12 +23,8 @@ typedef enum{
     ATAQUEFIS,
     ATAQUEMAG,
     CURA,
+    NULO = -1,
 }Tipo;
-
-typedef enum {
-    DANO,
-    STATMOD
-}Efeito_Tipos;
 
 typedef enum {
     NADA,
@@ -46,19 +42,19 @@ typedef enum {
 }Valido;
 
 typedef enum {
-    FINAL,
-    VENTO,
+    VENTO = 1,
     BOSQUE,
     AGUA,
     FOGO,
 }Dungeon;
 
 typedef enum {
-    BOSS,
+    BOSS, 
     FACIL,
     MEDIO,
-    DIFICIL
-}Dificuldade_M;
+    DIFICIL,
+    MOB_NULO = 0,
+}Dificuldade;
 
 typedef enum {
     NORTE,
@@ -66,6 +62,18 @@ typedef enum {
     SUL, 
     OESTE,
 } DIRECOES;
+
+typedef enum {
+    CARREGAR,
+    JOGAR,
+    DIFICULDADE
+}MenuOp;
+
+typedef enum {
+    GUERREIRO,
+    MAGO,
+    SACERDOTE
+}MenuClasses;
 //-------------------------------------------------------------------------------------------------------------------
 //structs:
 
@@ -82,11 +90,6 @@ typedef struct{
     int Tipo,Valor;
 }CARTA;
 
-typedef struct {  //efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
-    char Nome[50];
-    int Tipo,Valor,Stat,Contador;
-}EFEITO;
-
 typedef struct NO_BARALHO{ //baralho eh uma lista encadeada
     CARTA Carta;    //carta eh um struct carta
     struct NO_BARALHO *PtrProx;
@@ -95,18 +98,20 @@ typedef struct NO_BARALHO{ //baralho eh uma lista encadeada
 typedef struct{
     int UltimoSavepoint;
     CARTA Cartas[100];
-    int Dificuldade; //Facil = 5, Medio = 10, Dificil = 15;
+    int Dificuldade; 
     int Dinheiro;
 }SAVE_DADOS;
+
+typedef struct{
+    int QtdCartaAtual;
+    int QtdCartaTotal;
+    int QtdCartamaoatual;
+}DADOS_BATALHA;
 
 typedef struct {
     char Nome[50];//nome
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
-    NO_BARALHO *Baralho; //baralho lista encadeada
-    ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
-    ITEM Inventario[6];//itens guardados quantidade ainda a decidir
-    EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
 }PERSONAGEM;
 
 typedef struct{
@@ -115,11 +120,15 @@ typedef struct{
 }NPC;
 
 typedef struct{
+    char Nome[30];
+    int Tipo, Valor;
+}SKILL_INI;
+
+typedef struct{
     char Nome[50];//nome
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
-    ITEM Equipados[2]; //equipados:: quantidade ainda a decidir
-    EFEITO Efeitos[10];//efeitos overtime ex: bleed, poison, buff de dano, buff de def etc
+    SKILL_INI Habilidades[MAX_HABILIDADES];
 }INIMIGOS;
 
 typedef struct{
@@ -127,7 +136,7 @@ typedef struct{
     char Direcoes[4][30]; //Norte, Leste, Sul, Oeste
     int Tipo_Especial; //Especial = 0, não é pra voltar nada e outros valores podem ser algo como: 1 = bau, 2 = alavanca...
     int Lugar_Valido; // 0 = Não é possivel Acessar (De forma alguma), 1 = É possivel de ser acessado.
-    INIMIGOS inimigos[4];//inimigos presentes no quarto
+    INIMIGOS inimigos[max_inimigo_sala];//inimigos presentes no quarto
 }MODELO_SALA_DUNGEON;
 
 #endif

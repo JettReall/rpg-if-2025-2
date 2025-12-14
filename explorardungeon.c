@@ -4,14 +4,24 @@
 #include "explorardungeon.h"
 
 
-int ExplorarDungeon(int Escolhida) {
+
+int main(int Escolhida) {
+     IniciarPlaceholder();
      AbrirArquivoDungeon(Escolhida); //USa de um switch para abrir o arquivo correto
-    
+  
      do {
           SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
-          //Encontro de batalha
+          if (SalaAtual->inimigos[0].HpAtual > 0){
+               //Encontro de batalha
+          } else {
+             
+          }
+          printf("%s\n",SalaAtual->inimigos[0].Nome);
+          printf("%s\n",SalaAtual->inimigos[1].Nome);
+          printf("%s\n",SalaAtual->inimigos[2].Nome);
+          printf("%s\n",SalaAtual->inimigos[3].Nome);
           InteragirEmSala(); //Envolve a parte da sala já vazia, escolher uma opção do que fazer na sala
-     } while (FlagSaida == 0);//A condição do While será o Hp do boss, mas como não foi integrado ainda, considerei o 1 para teste
+     } while (FlagSaida != 1);
      
      return 0;
 }
@@ -29,20 +39,24 @@ void AbrirArquivoDungeon(int Dungeon) {
                if(fgets(buffer, sizeof(buffer), ArqPtr) == NULL) break;//Pega a linha descartável do arquivo
                
                lerSalaDoArquivo(ArqPtr, &DungeonAtual[i][j]);
-               //Lê a informação de cada sala, primeiro as colunas, depois as linhas
+               //Lê a informação de cada sala, pprimeiro da linha, saltando de coluna em coluna ate fechar a linha
                
-               if(DungeonAtual[i][j].Tipo_Especial == ENTRADA) {
-                         Coordenadas[X] = i;
-                         Coordenadas[Y] = j;
-               } //Pega a coordenada da entrada
+               if(DungeonAtual[i][j].Tipo_Especial == ENTRADA) {  //Pega a coordenada da entrada
+                    Coordenadas[X] = i;
+                    Coordenadas[Y] = j;
+               }  if (DungeonAtual[i][j].Tipo_Especial == SALA_BOSS) {  //preenche a sala do boss
+                    SalaBoss = &DungeonAtual[i][j];
+               }      
 
                for(int k = 0; k < max_inimigo_Dungeon; k++) {
-                    DungeonAtual[i][j].inimigos[k] = InimigoVazio;
+                    DungeonAtual[i][j].inimigos[k] = Inimigo_Nulo;
                     //copia para os locais de inimigos, uma struct de inimigo vazio
                }
           }  
      }
+     CriarDungeon(DungeonAtual, DIFICIL, Dungeon);
 }
+
 int InicializarDungeon(int DungeonEscolhida) {
      switch (DungeonEscolhida) { //De acordo com o valor dungeon passada pra ele, ele abre o arquivo da dungeon
      case VENTO:
@@ -64,6 +78,8 @@ int InicializarDungeon(int DungeonEscolhida) {
           printf("Erro ao abrir arquivo");
           return 1;
      }
+
+
      strcpy(DescDoObstaculo,DescParaObstaculo[DungeonEscolhida-1]); //copia a mensagem de obstáculo da dungeon
      for (int i =0; i < MAX_ALAVANCAS;i++) {
           AlavancasDungeon[i] = Alavancas[DungeonEscolhida-1][i];
@@ -116,7 +132,6 @@ void ImprimirOpcoes() {
                printf("(Sair da sala)\n");
                break;
           }
-
 }
 
 
@@ -214,15 +229,21 @@ void Andar() {
 
 void ValidaInteracao(int Interacao) {
      switch (Interacao) {
-                    case BAU:
-                    case ALAVANCA:
-                    case ENTRADA:
-                         EfeitoDeSala(SalaAtual->Tipo_Especial);//chama a função de acordo com o tipo
-                         break;
-                    default:
-                         printf("Não há nada para interagir\n");
-                         break;
-                    }
+          case BAU:
+          case ALAVANCA:
+          case ENTRADA:
+               EfeitoDeSala(SalaAtual->Tipo_Especial);//chama a função de acordo com o tipo
+               break;
+          default:
+               printf("Não há nada para interagir\n");
+               break;
+     }
+}
+
+void IniciarPlaceholder() {
+     for (int i = 0; i < max_inimigo_sala; i++) {
+          SALA_VAZIA.inimigos[i] = Inimigo_Nulo;
+     }
 }
 
 

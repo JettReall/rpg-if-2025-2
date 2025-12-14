@@ -6,6 +6,8 @@
 #define max_array_inimigo 20
 #define MAX_TAM_DESCRICAO 200
 #define TEMPLOS 4
+#define modificador 5
+#define MAX_HABILIDADES 2
 
 #define ITEM_VAZIO {"\0","\0",{0},0}
 

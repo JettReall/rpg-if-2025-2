@@ -1,9 +1,9 @@
 #if !defined(EXPLORARDUNGEON_H)
 #define EXPLORARDUNGEON_H
 
-#include "criardungeons.h"
-#include "Varglobal.h"
+#include "varglobal.h"
 #include "structs.h"
+#include "criardungeons.h"
 #define LINHAS 6
 #define COLUNAS 6
 #define MAX_OPCOES_EXPLORAR 2
@@ -13,9 +13,22 @@
 #define MAX_ALAVANCAS 3
 
 
-#define EFEITO_VAZIO {"\0",0,0,0,0}
+static const ITEM ItemVazio = {
+    .Nome = "\0",
+    .Descricao = "\0",
+    .Stat = {0},
+    .Custo =0,
+};
 
-#define SALA_VAZIA {"\0",{"\0"},NADA,INVALIDO,{INIMIGO_VAZIO}}
+extern const INIMIGOS Inimigo_Nulo;
+
+MODELO_SALA_DUNGEON SALA_VAZIA = {
+     .DescricaoSala = "\0",
+     .Direcoes = {"\0"},
+     .Tipo_Especial = NADA,
+     .Lugar_Valido = INVALIDO,
+};
+
 
 enum OpcoesMenu {
      CAMINHAR = 1,
@@ -42,9 +55,9 @@ typedef struct {
 } SALAS_ALAVANCA;
 
 
-const INIMIGOS InimigoVazio = {"\0",{0},0,0,{ITEM_VAZIO},{EFEITO_VAZIO}};
 MODELO_SALA_DUNGEON DungeonAtual[LINHAS][COLUNAS];
 MODELO_SALA_DUNGEON *SalaAtual = NULL;
+MODELO_SALA_DUNGEON *SalaBoss = NULL;
 
 SALAS_ALAVANCA Alavancas[TEMPLOS][MAX_ALAVANCAS] = {
      { //Vento
@@ -78,7 +91,8 @@ int FlagSaida = 0;
 
 FILE *ArqPtr = NULL;
 
-int ExplorarDungeon(int Escolhida);
+//int ExplorarDungeon(int Escolhida);
+
 void AbrirArquivoDungeon(int Dungeon);
 int InicializarDungeon(int DungeonEscolhida);
 void InteragirEmSala();
@@ -87,8 +101,9 @@ void Andar();
 void ValidarOpcaoSelecionada(int *Selecionada);
 void EfeitoDeSala(int TipoDeSala);
 void ChecarComAndar(int DirEscolhida,int Validado,int Calculo);
+extern void CriarDungeon(MODELO_SALA_DUNGEON mapa[6][6], int dificuldade, int tipodungeon);
 extern void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala);
-int ExplorarDungeon(int Escolhida);
 void ValidaInteracao(int Interacao);
+void IniciarPlaceholder();
 
 #endif // EXPLORARDUNGEON_H
