@@ -9,7 +9,7 @@ int main() {
      while(Loop) {
           printf("%s\n",LocalAtual->DadosLocal.DescricaoLocal);
           OpcoesDeCadaLocal[LocalAtual->DadosLocal.ID](OpcoesLocal(LocalAtual->DadosLocal.ID)); //Ponteiro de função que acessa função referente ao local, imprime o que tem de lá e escolhe 
-          //ExplorarDungeon(AtivarDungeon);
+          
      }
 }
 
@@ -99,7 +99,7 @@ void EntrarDungeon() {
           printf("Você seguiu o caminho até chegar na entrada da masmorra.\n");
           if (DungeonsAbertas[CaminhoDungeon-1] == ABERTO) { //Checa se o lugar foi liberado
                printf("Cheguei à dungeon\n"); 
-               AtivarDungeon = CaminhoDungeon; //Comando para ativar a dungeon
+               ExplorarDungeon(CaminhoDungeon); //Comando para ativar a dungeon
           } else {
                printf("Você caminha e encontra o templo trancado... não há muito o que fazer por agora\n");
                printf("Uma caminhada de volta, criticando o código de quem não pensou um jeito melhor de alertar o jogador, depois; você volta à placa\n");

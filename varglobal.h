@@ -9,7 +9,7 @@
 
 #define ITEM_VAZIO {"\0","\0",{0},0}
 
-int AtivarDungeon = 0;
+
 
 enum Ativacao{
      NAO_ATIVADO = 0, FECHADO = 0,

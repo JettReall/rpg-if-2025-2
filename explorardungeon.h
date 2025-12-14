@@ -74,6 +74,7 @@ SALAS_ALAVANCA AlavancasDungeon[MAX_ALAVANCAS] = {0,0,NAO_ATIVADO,NULL};
 
 int Coordenadas[2] = {0};
 int AlavancasQtd = 0;
+int FlagSaida = 0;
 
 FILE *ArqPtr = NULL;
 
@@ -88,6 +89,6 @@ void EfeitoDeSala(int TipoDeSala);
 void ChecarComAndar(int DirEscolhida,int Validado,int Calculo);
 extern void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala);
 int ExplorarDungeon(int Escolhida);
-
+void ValidaInteracao(int Interacao);
 
 #endif // EXPLORARDUNGEON_H

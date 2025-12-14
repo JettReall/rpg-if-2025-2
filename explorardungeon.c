@@ -8,11 +8,10 @@ int ExplorarDungeon(int Escolhida) {
      AbrirArquivoDungeon(Escolhida); //USa de um switch para abrir o arquivo correto
     
      do {
-          printf("-----------%d,%d-----------\n",Coordenadas[X],Coordenadas[Y]);
           SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
           //Encontro de batalha
           InteragirEmSala(); //Envolve a parte da sala já vazia, escolher uma opção do que fazer na sala
-     } while (1);//A condição do While será o Hp do boss, mas como não foi integrado ainda, considerei o 1 para teste
+     } while (FlagSaida == 0);//A condição do While será o Hp do boss, mas como não foi integrado ainda, considerei o 1 para teste
      
      return 0;
 }
@@ -103,14 +102,21 @@ void InteragirEmSala() {
 
 void ImprimirOpcoes() {
      printf("1. Caminhar pela Dungeon\n");
-     if (SalaAtual->Tipo_Especial == BAU || SalaAtual->Tipo_Especial == ALAVANCA) {
-          printf("2. Interagir");
-          if (SalaAtual->Tipo_Especial == BAU) {
+     switch (SalaAtual->Tipo_Especial) {
+          case BAU:
+               printf("2. Interagir");
                printf("(Abrir baú)\n");
-          } else if (SalaAtual->Tipo_Especial == ALAVANCA) {
+               break;
+          case ALAVANCA:
+               printf("2. Interagir");
                printf("(Puxar alavanca)\n");
+               break;
+          case ENTRADA:
+               printf("2. Interagir");
+               printf("(Sair da sala)\n");
+               break;
           }
-     };
+
 }
 
 
@@ -120,12 +126,7 @@ void ValidarOpcaoSelecionada(int *Selecionada) {
                Andar();
                break;
           case INTERAGIR:
-               if ((SalaAtual->Tipo_Especial == BAU || SalaAtual->Tipo_Especial == ALAVANCA)) {
-                    EfeitoDeSala(SalaAtual->Tipo_Especial);
-               } else {
-                    printf("Não há nada para interagir\n");
-               }
-               
+               ValidaInteracao(SalaAtual->Tipo_Especial);
                break; 
           default:
                while (1) { //Só libera após um valor válido ser escrito, até lá, ficará em loop para evitar erros
@@ -138,9 +139,9 @@ void ValidarOpcaoSelecionada(int *Selecionada) {
 }
 
 void EfeitoDeSala(int TipoDeSala) {
-     if (TipoDeSala == ALAVANCA) {
-          printf("Puxando alvanca\n");
-         for (int i = 0; i < AlavancasQtd; i++) { //Checa as salas de alavanca, quando acha a sala atual, libera a passagem conectada
+     switch (TipoDeSala) {
+     case ALAVANCA:
+          for (int i = 0; i < AlavancasQtd; i++) { //Checa as salas de alavanca, quando acha a sala atual, libera a passagem conectada
                if(AlavancasDungeon[i].Alavanca_X == Coordenadas[X] && AlavancasDungeon[i].Alavanca_Y == Coordenadas[Y]) { //checa as coordenadas e acha as iguais da sala atual
                          printf("Click\n");
                     if (AlavancasDungeon->Ativada==ATIVADO) {
@@ -151,8 +152,17 @@ void EfeitoDeSala(int TipoDeSala) {
                          AlavancasDungeon->Ativada = ATIVADO;
                     }
                }
-         } 
+          } 
+          break;
+     case ENTRADA:
+          FlagSaida = 1;
+     default:
+          break;
      }
+
+
+     
+
 }
 
 void Andar() {
@@ -202,7 +212,18 @@ void Andar() {
      
 }
 
-
+void ValidaInteracao(int Interacao) {
+     switch (Interacao) {
+                    case BAU:
+                    case ALAVANCA:
+                    case ENTRADA:
+                         EfeitoDeSala(SalaAtual->Tipo_Especial);//chama a função de acordo com o tipo
+                         break;
+                    default:
+                         printf("Não há nada para interagir\n");
+                         break;
+                    }
+}
 
 
 
