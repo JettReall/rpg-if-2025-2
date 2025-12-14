@@ -109,6 +109,7 @@ void Comeca_Jogo()
     printf("A função main só acaba quando o jogador finaliza o jogo, que, para isso, precisa passar por 4 dungeons, coletar 4 artefatos elementais e derrotar o chefe final... Morrer nesse jogo não causa que eu seja apagado\n");
     printf("então zerar o jogo é o jeito mais plausível de sair vivo daqui... então melhor começar a aventura\n");
     AperteBotaoParaPular();
+    printf("Você vê o mapa carregar na sua frente. Parece ser uma cabana.\n");
 
 }
 
