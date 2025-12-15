@@ -5,22 +5,34 @@
 
 
 
-int main(int Escolhida) {
+int main(int Escolhida) { //ExploarDungeon
      IniciarPlaceholder();
      AbrirArquivoDungeon(Escolhida); //USa de um switch para abrir o arquivo correto
      CriarDungeon(DungeonAtual, DIFICIL, Escolhida);
   
      do {
           SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
-          if (SalaAtual->inimigos[0].HpAtual > 0){
-               //Encontro de batalha
-          } else {
-             
-          }
+          
+          
+          printf("---\n");
           printf("%s\n",SalaAtual->inimigos[0].Nome);
           printf("%s\n",SalaAtual->inimigos[1].Nome);
           printf("%s\n",SalaAtual->inimigos[2].Nome);
           printf("%s\n",SalaAtual->inimigos[3].Nome);
+
+          FlagBatalha = NAO_ATIVADO;
+          printf("%s\n",SalaAtual->DescricaoSala); //Imprime a descrição
+          for (int i = 0; i < max_inimigo_sala; i++) {
+               if (strcmp(SalaAtual->inimigos[i].Nome,Inimigo_Nulo.Nome) != 0) {
+                     FlagBatalha = ATIVADO;
+                    break;
+               }
+          }
+
+          if (FlagBatalha == ATIVADO) {
+               printf("Uma emboscada!\n");
+          }
+
           InteragirEmSala(); //Envolve a parte da sala já vazia, escolher uma opção do que fazer na sala
      } while (FlagSaida != 1);
      
@@ -108,7 +120,7 @@ void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala) {
 
 void InteragirEmSala() {
      int OpcaoSelecionada = 0;
-     printf("%s\n",SalaAtual->DescricaoSala); //Imprime a descrição
+
      printf("O que deseja fazer?\n");
      ImprimirOpcoes();
      scanf("%d",&OpcaoSelecionada);

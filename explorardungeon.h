@@ -85,7 +85,8 @@ SALAS_ALAVANCA AlavancasDungeon[MAX_ALAVANCAS] = {0,0,NAO_ATIVADO,NULL};
 
 int Coordenadas[2] = {0};
 int AlavancasQtd = 0;
-int FlagSaida = 0;
+int FlagSaida = NAO_ATIVADO;
+int FlagBatalha = NAO_ATIVADO;
 
 FILE *ArqPtr = NULL;
 
