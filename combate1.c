@@ -327,14 +327,14 @@ int main(){
     };
 
 //    printf("declarou personagem\n");
-    criar_ini_bosque();
+    inimigo[1] = CatalogoVento[3];
     //INIMIGOS *inimigosc[4]={&inimigo[0],&inimigo[1],&inimigo[2],&inimigo[3]};
 //    printf("declarou inimigos\n");
     NO_BARALHO *baralho=NULL;
 //    printf("criou a head\n");
     CARTA baralhoarr[8]={fis1,fis1,fis1,mag1,mag1,mag1,cura1,cura1};
     printf("\n");//PRINTF LENDARIO
-    CriaBaralho(baralhoarr,&baralho,dadosbaralho.QtdCartaTotal);
+    CriaBaralho(baralhoarr,&baralho, dadosbaralho.QtdCartaTotal,&dadosbaralho.QtdCartaAtual);
     Embaralhar(&baralho);
 //    PrintBaralho(baralho);
 //    printf("Criou baralho\n");
