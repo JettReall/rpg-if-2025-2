@@ -10,45 +10,42 @@
 int Dificuldade_Jogo = FACIL;
 int Classe;
 
-SAVE_DADOS SaveSlot;
+
 PERSONAGEM Jogador;
-DADOS_BATALHA dadosbaralho={
-    .QtdCartaTotal = TAMANHO_DECK,
-    .QtdCartaAtual = TAMANHO_DECK,
-    .QtdCartamaoatual = 0,
-    };
+
 
 void Iniciar()
 {
-    Menu();
-    //
-    printf("%s\n%d\n%d\n",Jogador.Nome,Jogador.Classe,Jogador.HpAtual);
-    for (int i = 0; i < TAMANHO_DECK; i++) {
-        printf("%s\n",SaveSlot.Cartas[i].Nome);
+    SAVE_DADOS SaveSlot;
+    while (FlagMenu != 1) {
+        Menu(SaveSlot);
     }
-    //
+
 }
 
-void Menu() {
+void Menu(SAVE_DADOS Save) {
     int Opcoes = DIFICULDADE;
     while (Opcoes == DIFICULDADE) {
         printf("A camminhada do Herói\n");
-        printf("(0) Carregar Jogo \t(1) Jogar \t(2) Dificuldade \n");
+        printf("(0) Carregar Jogo \t(1) Jogar \t(2) Dificuldade \t(3) Sair\n");
         scanf("%d", &Opcoes);
-        switch (Opcoes)
-        {
-        case CARREGAR:
+        switch (Opcoes) {
+    /*  case CARREGAR:
             TestaSave();
             break;
+            */
         case JOGAR:
+            FlagMenu = 1;
             EscolheClasse();
             Historia_Comeco_Jogo();
             break;
         case DIFICULDADE:
-            SaveSlot.Dificuldade = Escolhedificuldade();
+            Save.Dificuldade = Escolhedificuldade();
             break;
+        case SAIR:
+        exit(0);
         default:
-            printf("Opcao Invalida. Escolha uma Opcao Valida");
+            printf("Opcao Invalida. Escolha uma Opcao Valida\n");
             break;
         }
     }
@@ -92,24 +89,11 @@ void EscolheClasse()
     }
 }
 void PreencherPadrao(int *ClsEscolhida) {
-    CARTA *DeckInicial[TAMANHO_DECK] = {
-       &CatalogoCartas[0][0][0],&CatalogoCartas[0][0][1],
-       &CatalogoCartas[0][0][0],&CatalogoCartas[1][0][1],
-       &CatalogoCartas[1][1][0],&CatalogoCartas[0][1][1],
-       &CatalogoCartas[0][2][0],&CatalogoCartas[1][2][1],
-       &CatalogoCartas[0][0][0],&CatalogoCartas[1][0][1],
-       &CatalogoCartas[1][1][0],&CatalogoCartas[0][1][1],
-    };
-    
-
     for (int i = 0; i < MAX_STATS - 1; i++) {//Tirar o XP
         Jogador.Stat[i] = DadosClasses[*ClsEscolhida].Stat[i];
     }
     Jogador.HpAtual = DadosClasses[*ClsEscolhida].HpAtual;
     Jogador.Classe = DadosClasses[*ClsEscolhida].Classe;
-    for (int i = 0; i < dadosbaralho.QtdCartaTotal;i++) {
-        SaveSlot.Cartas[i] = *DeckInicial[i];
-    }
 }
 
 void AperteBotaoParaPular() {
@@ -144,8 +128,7 @@ void Historia_Comeco_Jogo()
 int main()
 {
     Iniciar();
-
-    //Cidade();
+    Cidade(&Jogador);
 
     return 0;
 }

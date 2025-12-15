@@ -66,7 +66,8 @@ typedef enum {
 typedef enum {
     CARREGAR,
     JOGAR,
-    DIFICULDADE
+    DIFICULDADE,
+    SAIR,
 }MenuOp;
 
 typedef enum {

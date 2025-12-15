@@ -351,6 +351,8 @@ int batalha(NO_BARALHO **baralho,CARTA *baralhoarr,PERSONAGEM player,INIMIGOS in
 
     if(player.HpAtual<=0){
         printf("%s nao pode mais lutar e a luta foi encerrada\n",player.Nome);
+        printf("Fim de jogo.\n");
+        exit(0);
     }else{
         printf("%s ganhou a luta\n",player.Nome);
         DANO healthpack={0,0,125};
@@ -360,10 +362,10 @@ int batalha(NO_BARALHO **baralho,CARTA *baralhoarr,PERSONAGEM player,INIMIGOS in
     return player.HpAtual;
 }
 
-int Combate(/*nt baralhoarr[],*/INIMIGOS InimigosEmSala[],PERSONAGEM *Atacante){ //main
+int Combate(INIMIGOS InimigosEmSala[],PERSONAGEM *Atacante){ //main
     srand(time(NULL));
 //    printf("Entrou no main\n");
-
+    printf("%s: %d/%d",Atacante->Nome,Atacante->HpAtual,Atacante->Stat[HPMAX]);
 //    printf("declarou personagem\n");
     //inimigo[1] = CatalogoVento[3];
     //INIMIGOS *inimigosc[4]={&inimigo[0],&inimigo[1],&inimigo[2],&inimigo[3]};

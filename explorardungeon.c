@@ -6,17 +6,11 @@
 
 
 
-int main(int Escolhida) { //ExploarDungeon
+int ExplorarDungeon(int Escolhida,PERSONAGEM *player) { //ExploarDungeon
      IniciarPlaceholder();
      AbrirArquivoDungeon(Escolhida); //USa de um switch para abrir o arquivo correto
      CriarDungeon(DungeonAtual,DIFICIL,Escolhida);
   
-     PERSONAGEM player = {
-    "personagem demo",        // Nome
-    {200, 5, 5, 10, 10, 10, 0}, // Stat[7]
-    200,                      // HpAtual
-    900                         // Xp
-    };
 
      do {
           SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
@@ -39,7 +33,7 @@ int main(int Escolhida) { //ExploarDungeon
 
           if (FlagBatalha == ATIVADO) {
                printf("Uma emboscada!\n");
-               Combate(SalaAtual->inimigos, &player);
+               Combate(SalaAtual->inimigos, player);
                for (int i = 0; i < max_inimigo_sala;i++) {
                     SalaAtual->inimigos[i] = Inimigo_Nulo;
                }

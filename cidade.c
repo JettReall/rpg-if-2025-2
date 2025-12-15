@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include "cidade.h"
 
-int Cidade() {
+int Cidade(PERSONAGEM *passagem) {
      InicializarCidade();
       //Ponto de inicio de andar na cidade
      while(Loop) {
           printf("%s\n",LocalAtual->DadosLocal.DescricaoLocal);
-          OpcoesDeCadaLocal[LocalAtual->DadosLocal.ID](OpcoesLocal(LocalAtual->DadosLocal.ID)); //Ponteiro de função que acessa função referente ao local, imprime o que tem de lá e escolhe 
+          OpcoesDeCadaLocal[LocalAtual->DadosLocal.ID](OpcoesLocal(LocalAtual->DadosLocal.ID),passagem); //Ponteiro de função que acessa função referente ao local, imprime o que tem de lá e escolhe 
           
      }
 }
@@ -52,33 +52,33 @@ int OpcoesLocal(int Local) {
      return OpcaoEscolhida; //retorna para o ponteiro de função
 }
 
-void OpcoesCasa(int Selecionada) {
+void OpcoesCasa(int Selecionada,PERSONAGEM *Jgdr) {
      switch (Selecionada) {
      case SAIR_LOCAL:
           TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
      case SALVAR:
           printf("Encerrando\n");
-          Loop = 0;
+          exit(0);
           break;
      case MEXER_BARALHO:
           printf("Baralho lacrado\n");
           break;
      }
 }
-void OpcoesDungeon(int Selecionada) {
+void OpcoesDungeon(int Selecionada,PERSONAGEM *Jgdr) {
      switch (Selecionada) {
      case SAIR_LOCAL:
           TrocarDeLugar(LocalAtual->DadosLocal.ID);
           break;
      case ENTRAR_DUNGEON:
           printf("Cada placa aponta para um canto diferente.\n");
-          EntrarDungeon();
+          EntrarDungeon(Jgdr);
           break;
      }
 }
 
-void EntrarDungeon() {
+void EntrarDungeon(PERSONAGEM *Plyr) {
      int CaminhoDungeon = 0;
      int DungeonsAbertas[TEMPLOS] = {ABERTO,FECHADO,FECHADO,FECHADO};
 
@@ -99,14 +99,14 @@ void EntrarDungeon() {
           printf("Você seguiu o caminho até chegar na entrada da masmorra.\n");
           if (DungeonsAbertas[CaminhoDungeon-1] == ABERTO) { //Checa se o lugar foi liberado
                printf("Cheguei à dungeon\n"); 
-               ExplorarDungeon(CaminhoDungeon); //Comando para ativar a dungeon
+               ExplorarDungeon(CaminhoDungeon,Plyr); //Comando para ativar a dungeon
           } else {
                printf("Você caminha e encontra o templo trancado... não há muito o que fazer por agora\n");
                printf("Uma caminhada de volta, criticando o código de quem não pensou um jeito melhor de alertar o jogador, depois; você volta à placa\n");
           }
 }
 
-void OpcoesPraca(int Selecionada) {
+void OpcoesPraca(int Selecionada,PERSONAGEM *Jgdr) {
      switch (Selecionada) {
      case SAIR_LOCAL:
           TrocarDeLugar(LocalAtual->DadosLocal.ID);
@@ -117,7 +117,7 @@ void OpcoesPraca(int Selecionada) {
      }
 }
 
-void OpcoesTaberna(int Selecionada) {
+void OpcoesTaberna(int Selecionada,PERSONAGEM *Jgdr) {
      switch (Selecionada) {
      case SAIR_LOCAL:
           TrocarDeLugar(LocalAtual->DadosLocal.ID);

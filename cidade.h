@@ -1,6 +1,6 @@
 #if !defined(CIDADE_H)
 #define CIDADE_H
-
+#include <stdlib.h>
 #include "structs.h"
 #include "varglobal.h"
 #define MAXOPCOES_MAIOR 3
@@ -95,15 +95,15 @@ int DungeonsLiberadas = 1;
 int OpcoesLocal(int Local);
 void InicializarCidade();
 void TrocarDeLugar(int ID_Atual);
-void EntrarDungeon();
-int Cidade();
-extern int ExplorarDungeon(int Escolhida);
+void EntrarDungeon(PERSONAGEM *Plyr);
+int Cidade(PERSONAGEM *passagem);
+extern int ExplorarDungeon(int Escolhida,PERSONAGEM *Player);
 
-void OpcoesCasa(int Selecionada);
-void OpcoesDungeon(int Selecionada);
-void OpcoesPraca(int Selecionada);
-void OpcoesTaberna(int Selecionada);
-void (*OpcoesDeCadaLocal[MAXDESTINOS])(int Selecionada) = {
+void OpcoesCasa(int Selecionada,PERSONAGEM *Jgdr);
+void OpcoesDungeon(int Selecionada,PERSONAGEM *Jgdr);
+void OpcoesPraca(int Selecionada,PERSONAGEM *Jgdr);
+void OpcoesTaberna(int Selecionada,PERSONAGEM *Jgdr);
+void (*OpcoesDeCadaLocal[MAXDESTINOS])(int Selecionada,PERSONAGEM *Jgdr) = {
      OpcoesCasa,
      OpcoesDungeon,
      OpcoesPraca,

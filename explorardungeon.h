@@ -105,7 +105,7 @@ void ValidarOpcaoSelecionada(int *Selecionada);
 void EfeitoDeSala(int TipoDeSala);
 void ChecarComAndar(int DirEscolhida,int Validado,int Calculo);
 extern void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala);
-extern int Combate(/*nt baralhoarr[],*/INIMIGOS InimigosEmSala[],PERSONAGEM *Atacante);
+extern int Combate(INIMIGOS InimigosEmSala[],PERSONAGEM *Atacante);
 extern void CriarDungeon(MODELO_SALA_DUNGEON mapa[LINHAS][COLUNAS], int dificuldade, int tipodungeon);
 void ValidaInteracao(int Interacao);
 void IniciarPlaceholder();
