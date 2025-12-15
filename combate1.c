@@ -12,6 +12,7 @@ CARTA mag1={"magico1 teste","",ATAQUEMAG,8};
 CARTA cura1={"cura1 teste","",CURA,5};
 CARTA cartanula={"Nulo","Nulo",-1,0};
 DADOS_BATALHA dadosbaralho={8,8,0};
+int FlagBatalha = 0;
 
 typedef struct{
     int danofis;
@@ -132,33 +133,61 @@ void InterfacePlayer(PERSONAGEM player,CARTA mao[6],int turno){
 void EscolheAlvo(INIMIGOS inimigos[4],int *alvo){
     int contador=0;
     for(int i=0;i<4;i++){
-        contador++;
         if(inimigos[i].HpAtual>0){
-            printf("(%d)%s\n",contador,inimigos[i].Nome);
+            printf("(%d)%s (%d/%d)\n",i+1,inimigos[i].Nome,inimigos[i].HpAtual,inimigos[i].Stat[HPMAX]);
         }else{
-            contador--;
         }
     }
     scanf("%d",alvo);
-    *alvo=*alvo+(4-contador);
 }
 
-void CausaDanoPlayer(PERSONAGEM *player,INIMIGOS inimigos[4],DANO dano,int alvo){
-    alvo-=1;
-    if(dano.danofis>0)dano.danofis=(dano.danofis+player->Stat[ATQFIS]-inimigos[alvo].Stat[DEFFIS]);
-    if(dano.danomag>0)dano.danomag=(dano.danomag+player->Stat[ATQMAG]-inimigos[alvo].Stat[DEFFIS]);
-    int dodge=rand()%101;
-    if(dodge>=inimigos[alvo].Stat[SPEED]){
-        inimigos[alvo].HpAtual-=dano.danofis+dano.danomag;
-        printf("%s recebeu %d de dano\n",inimigos[alvo].Nome,dano.danofis+dano.danomag);
-        if((alvo-1)!=-1&&inimigos[alvo-1].HpAtual>0){
-            inimigos[alvo-1].HpAtual-=(dano.danofis+dano.danomag)/2;
-        printf("%s recebeu %d de dano\n",inimigos[alvo-1].Nome,(dano.danofis+dano.danomag)/2);
+void CausaDanoPlayer(PERSONAGEM *player, INIMIGOS inimigos[4], DANO dano, int alvo) {
+    alvo--;
+    int dano_fis = 0, dano_mag = 0;
+    
+    // Calcula dano físico
+    if(dano.danofis > 0) {
+        dano_fis = dano.danofis + player->Stat[ATQFIS] - inimigos[alvo].Stat[DEFFIS];
+        if(dano_fis < 0) dano_fis = 0;  // Não permite dano negativo
+    }
+    
+    // Calcula dano mágico (CORREÇÃO: usar DEFMAG)
+    if(dano.danomag > 0) {
+        dano_mag = dano.danomag + player->Stat[ATQMAG] - inimigos[alvo].Stat[DEFMAG];
+        if(dano_mag < 0) dano_mag = 0;  // Não permite dano negativo
+    }
+    
+    int dano_total = dano_fis + dano_mag;
+    printf("Dano alocado\n");
+    if(dano_total > 0) {
+        printf("Preparando ataque\n");
+        int dodge = rand() % 101;
+        if(dodge >= inimigos[alvo].Stat[SPEED]) {
+            printf("Não desviou\n");
+            inimigos[alvo].HpAtual -= dano_total;
+            printf("%s recebeu %d de dano (Físico: %d, Mágico: %d)\n", 
+                   inimigos[alvo].Nome, dano_total, dano_fis, dano_mag);
+            
+            // Dano aos adjacentes (metade do dano)
+            if((alvo-1) >= 0 && inimigos[alvo-1].HpAtual > 0) {
+                int dano_adjacente = dano_total / 2;
+                inimigos[alvo-1].HpAtual -= dano_adjacente;
+                printf("%s recebeu %d de dano por efeito colateral\n", 
+                       inimigos[alvo-1].Nome, dano_adjacente);
+            }
+            
+            if((alvo+1) < 4 && inimigos[alvo+1].HpAtual > 0) {
+                int dano_adjacente = dano_total / 2;
+                inimigos[alvo+1].HpAtual -= dano_adjacente;
+                printf("%s recebeu %d de dano por efeito colateral\n", 
+                       inimigos[alvo+1].Nome, dano_adjacente);
+            }
+        } else {
+            printf("%s desviou do ataque!\n", inimigos[alvo].Nome);
         }
-        if((alvo+1)!=4&&inimigos[alvo+1].HpAtual>0){
-            inimigos[alvo+1].HpAtual-=(dano.danofis+dano.danomag)/2;
-        printf("%s recebeu %d de dano\n",inimigos[alvo+1].Nome,(dano.danofis+dano.danomag)/2);
-        }
+    }
+     else {
+        printf("O ataque não teve efeito!\n");
     }
 }
 
@@ -256,7 +285,8 @@ void InimigueAtaque(INIMIGOS *inimigo,PERSONAGEM *player){
             dano.cura=inimigo->Habilidades[atq].Valor;
             break;
     }
-    printf("%s usou %s\n",inimigo->Nome,inimigo->Habilidades[atq]);
+    // CORREÇÃO: Acesse o campo Nome da habilidade
+    printf("%s usou %s\n",inimigo->Nome,inimigo->Habilidades[atq].Nome);
     DanoInimigue(dano,inimigo,player);
 }
 
@@ -297,13 +327,17 @@ int batalha(NO_BARALHO **baralho,CARTA *baralhoarr,PERSONAGEM player,INIMIGOS in
     int turno=0,finalizado=0;
     CARTA mao[6];
     limpaMao(mao);
+    printf("Mão limpa\n");
     printmao(mao);
+    printf("Mostrada mão\n");
+
     while(!finalizado){
     TurnoPlayer(baralho,baralhoarr,&player,inimigos,mao,turno);
     TurnoInimigos(&player,inimigos);
     finalizado=FimDeTurno(player,inimigos);
     turno++;
     }
+
     if(player.HpAtual<=0){
         printf("%s nao pode mais lutar e a luta foi encerrada\n",player.Nome);
     }else{
@@ -327,6 +361,7 @@ int main(){
     };
 
 //    printf("declarou personagem\n");
+    inimigo[0] = CatalogoVento[2];
     inimigo[1] = CatalogoVento[3];
     //INIMIGOS *inimigosc[4]={&inimigo[0],&inimigo[1],&inimigo[2],&inimigo[3]};
 //    printf("declarou inimigos\n");
@@ -338,6 +373,7 @@ int main(){
     Embaralhar(&baralho);
 //    PrintBaralho(baralho);
 //    printf("Criou baralho\n");
+
     player.HpAtual=batalha(&baralho,baralhoarr,player,inimigo);
-    printf("A batalha acabou e %s esta com %d/%d de vida",player.Nome,player.HpAtual,player.Stat[HPMAX]);
+    printf("A batalha acabou e %s esta com %d/%d de vida",player.Nome, player.HpAtual, player.Stat[HPMAX]);
 }
