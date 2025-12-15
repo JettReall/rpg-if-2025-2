@@ -13,6 +13,8 @@ CARTA cura1={"cura1 teste","",CURA,5};
 CARTA cartanula={"Nulo","Nulo",-1,0};
 DADOS_BATALHA dadosbaralho={8,8,0};
 int FlagBatalha = 0;
+int PilhaDeCompra = 0;
+
 
 typedef struct{
     int danofis;
@@ -76,7 +78,7 @@ void AcumulaDano(DANO *dano,CARTA *cartas,int qtd){
 }
 
 void PuxarCartasPlayer(NO_BARALHO **baralho, CARTA mao[6], int turno){
-    int qtd = (turno == 0 ? 4 : 1);
+    int qtd = (turno == 0 ? 4 : COMPRA_POR_TURNO);
     int compradas = 0;
 
 //    printf("\nPuxar cartas\n");
@@ -89,12 +91,13 @@ void PuxarCartasPlayer(NO_BARALHO **baralho, CARTA mao[6], int turno){
             if(mao[i].Valor == 0){   // slot vazio
                 mao[i] = PuxarCarta(baralho, &dadosbaralho.QtdCartaAtual);
                 printf("Puxou: (%d) %s\n", i, mao[i].Nome);
+                PilhaDeCompra--;
 
                 dadosbaralho.QtdCartamaoatual++;
                 compradas++;
                 achou = 1;
                 break;
-            }
+            } 
         }
 
         if(!achou){  
@@ -127,6 +130,10 @@ void InterfacePlayer(PERSONAGEM player,CARTA mao[6],int turno){
             contador++;
         }
     }
+    printf("Pilha de compra: %d cartas\n",PilhaDeCompra);
+    if (PilhaDeCompra <= ALERTA_FIM_DE_PILHA) {
+        printf("A pilha de compra está acabando! Recarregue, se não, perderá forças.\n");
+    }
     printf("\nQuantas Cartas deseja jogar(MAX 3)?Ou (10) para recarregar o baralho\n");
 }
 
@@ -158,12 +165,9 @@ void CausaDanoPlayer(PERSONAGEM *player, INIMIGOS inimigos[4], DANO dano, int al
     }
     
     int dano_total = dano_fis + dano_mag;
-    printf("Dano alocado\n");
     if(dano_total > 0) {
-        printf("Preparando ataque\n");
         int dodge = rand() % 101;
         if(dodge >= inimigos[alvo].Stat[SPEED]) {
-            printf("Não desviou\n");
             inimigos[alvo].HpAtual -= dano_total;
             printf("%s recebeu %d de dano (Físico: %d, Mágico: %d)\n", 
                    inimigos[alvo].Nome, dano_total, dano_fis, dano_mag);
@@ -223,6 +227,8 @@ void PlayerAtaque(PERSONAGEM *player,CARTA mao[6],INIMIGOS inimigos[4],NO_BARALH
             printf("Digite um valor valido");
         }
     }
+
+
     if(qtdprajogar!=10){   
         printf("Digite o numero () das cartas que gostaria de jogar separando por enter:\n");
         for(int i=0;i<qtdprajogar;i++){
@@ -247,6 +253,7 @@ void PlayerAtaque(PERSONAGEM *player,CARTA mao[6],INIMIGOS inimigos[4],NO_BARALH
         CuraPlayer(player,dano);
     }else{
         RecarregaBaralho(baralho,baralhoarr,&dadosbaralho.QtdCartaAtual,dadosbaralho.QtdCartaTotal);
+        PilhaDeCompra = TAMANHO_DECK;
         Embaralhar(baralho);
         printf("baralho recarregado\n");
     }
@@ -327,9 +334,7 @@ int batalha(NO_BARALHO **baralho,CARTA *baralhoarr,PERSONAGEM player,INIMIGOS in
     int turno=0,finalizado=0;
     CARTA mao[6];
     limpaMao(mao);
-    printf("Mão limpa\n");
     printmao(mao);
-    printf("Mostrada mão\n");
 
     while(!finalizado){
     TurnoPlayer(baralho,baralhoarr,&player,inimigos,mao,turno);
@@ -352,7 +357,6 @@ int batalha(NO_BARALHO **baralho,CARTA *baralhoarr,PERSONAGEM player,INIMIGOS in
 int main(){
     srand(time(NULL));
 //    printf("Entrou no main\n");
-    DADOS_BATALHA dadosbaralho={8,8,0};
     PERSONAGEM player = {
     "personagem demo",        // Nome
     {200, 5, 5, 10, 10, 10, 1}, // Stat[7]
@@ -361,8 +365,8 @@ int main(){
     };
 
 //    printf("declarou personagem\n");
-    inimigo[0] = CatalogoVento[2];
-    inimigo[1] = CatalogoVento[3];
+    inimigo[0] = CatalogoVento[BOSS];
+    //inimigo[1] = CatalogoVento[3];
     //INIMIGOS *inimigosc[4]={&inimigo[0],&inimigo[1],&inimigo[2],&inimigo[3]};
 //    printf("declarou inimigos\n");
     NO_BARALHO *baralho=NULL;
@@ -373,7 +377,7 @@ int main(){
     Embaralhar(&baralho);
 //    PrintBaralho(baralho);
 //    printf("Criou baralho\n");
-
+    PilhaDeCompra = dadosbaralho.QtdCartaTotal;
     player.HpAtual=batalha(&baralho,baralhoarr,player,inimigo);
     printf("A batalha acabou e %s esta com %d/%d de vida",player.Nome, player.HpAtual, player.Stat[HPMAX]);
 }
