@@ -74,6 +74,14 @@ typedef enum {
     MAGO,
     SACERDOTE
 }MenuClasses;
+
+typedef enum{
+    Nivel_1 = 1000,
+    Nivel_2 = 2000,
+    Nivel_3 = 4000,
+    Nivel_4 = 8000,
+}Niveis;
+
 //-------------------------------------------------------------------------------------------------------------------
 //structs:
 
@@ -115,6 +123,7 @@ typedef struct{
     CARTA Cartas[100];
     int Dificuldade; 
     int Dinheiro;
+    int DungeonsZeradas[TEMPLOS];
 }SAVE_DADOS;
 
 typedef struct{

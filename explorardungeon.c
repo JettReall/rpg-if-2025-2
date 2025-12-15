@@ -2,24 +2,32 @@
 #include <stdio.h>
 #include <string.h>
 #include "explorardungeon.h"
+#include "criardungeons.h"
 
 
 
 int main(int Escolhida) { //ExploarDungeon
      IniciarPlaceholder();
      AbrirArquivoDungeon(Escolhida); //USa de um switch para abrir o arquivo correto
-     CriarDungeon(DungeonAtual, DIFICIL, Escolhida);
+     CriarDungeon(DungeonAtual,DIFICIL,Escolhida);
   
+     PERSONAGEM player = {
+    "personagem demo",        // Nome
+    {200, 5, 5, 10, 10, 10, 0}, // Stat[7]
+    200,                      // HpAtual
+    900                         // Xp
+    };
+
      do {
           SalaAtual = &DungeonAtual[Coordenadas[X]][Coordenadas[Y]]; //Passa as informações da sala que ele entra
           
-          
+          /*
           printf("---\n");
           printf("%s\n",SalaAtual->inimigos[0].Nome);
           printf("%s\n",SalaAtual->inimigos[1].Nome);
           printf("%s\n",SalaAtual->inimigos[2].Nome);
           printf("%s\n",SalaAtual->inimigos[3].Nome);
-
+          */
           FlagBatalha = NAO_ATIVADO;
           printf("%s\n",SalaAtual->DescricaoSala); //Imprime a descrição
           for (int i = 0; i < max_inimigo_sala; i++) {
@@ -31,10 +39,16 @@ int main(int Escolhida) { //ExploarDungeon
 
           if (FlagBatalha == ATIVADO) {
                printf("Uma emboscada!\n");
-          }
+               Combate(SalaAtual->inimigos, &player);
+               for (int i = 0; i < max_inimigo_sala;i++) {
+                    SalaAtual->inimigos[i] = Inimigo_Nulo;
+               }
 
+               printf("---\n");
+               printf("%s\n",SalaAtual->DescricaoSala);
+          }
           InteragirEmSala(); //Envolve a parte da sala já vazia, escolher uma opção do que fazer na sala
-     } while (FlagSaida != 1);
+     } while (FlagSaida != 1 && SalaBoss->inimigos[BOSS].HpAtual > 0);
      
      return 0;
 }

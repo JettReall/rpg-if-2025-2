@@ -97,10 +97,12 @@ void PreencherPadrao(int *ClsEscolhida) {
        &CatalogoCartas[0][0][0],&CatalogoCartas[1][0][1],
        &CatalogoCartas[1][1][0],&CatalogoCartas[0][1][1],
        &CatalogoCartas[0][2][0],&CatalogoCartas[1][2][1],
+       &CatalogoCartas[0][0][0],&CatalogoCartas[1][0][1],
+       &CatalogoCartas[1][1][0],&CatalogoCartas[0][1][1],
     };
     
 
-    for (int i = 0; i < MAX_STATS; i++) {
+    for (int i = 0; i < MAX_STATS - 1; i++) {//Tirar o XP
         Jogador.Stat[i] = DadosClasses[*ClsEscolhida].Stat[i];
     }
     Jogador.HpAtual = DadosClasses[*ClsEscolhida].HpAtual;

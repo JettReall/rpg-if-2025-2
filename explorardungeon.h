@@ -18,7 +18,11 @@ static const ITEM ItemVazio = {
     .Custo =0,
 };
 
+int FlagBatalha = NAO_ATIVADO;
+
 extern const INIMIGOS Inimigo_Nulo;
+extern INIMIGOS CatalogoVento[TOTAL_INIMIGOS];
+
 
 MODELO_SALA_DUNGEON SALA_VAZIA = {
      .DescricaoSala = "\0",
@@ -86,7 +90,7 @@ SALAS_ALAVANCA AlavancasDungeon[MAX_ALAVANCAS] = {0,0,NAO_ATIVADO,NULL};
 int Coordenadas[2] = {0};
 int AlavancasQtd = 0;
 int FlagSaida = NAO_ATIVADO;
-int FlagBatalha = NAO_ATIVADO;
+
 
 FILE *ArqPtr = NULL;
 
@@ -101,6 +105,8 @@ void ValidarOpcaoSelecionada(int *Selecionada);
 void EfeitoDeSala(int TipoDeSala);
 void ChecarComAndar(int DirEscolhida,int Validado,int Calculo);
 extern void lerSalaDoArquivo(FILE *arquivo, MODELO_SALA_DUNGEON *sala);
+extern int Combate(/*nt baralhoarr[],*/INIMIGOS InimigosEmSala[],PERSONAGEM *Atacante);
+extern void CriarDungeon(MODELO_SALA_DUNGEON mapa[LINHAS][COLUNAS], int dificuldade, int tipodungeon);
 void ValidaInteracao(int Interacao);
 void IniciarPlaceholder();
 

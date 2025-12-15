@@ -14,19 +14,21 @@ void AdicionaCarta(CARTA n,NO_BARALHO **head,int *qtd){
 void RetiraCarta(int carta,NO_BARALHO **head,int *qtd){
     NO_BARALHO *atual = *head;
     NO_BARALHO *anterior = NULL;
+
+    // [CORREÇÃO CRÍTICA] Verificar se o nó atual é nulo antes de prosseguir
+    if (atual == NULL) { 
+        // Se a lista está vazia, mas *qtd > 0, isso corrige a inconsistência.
+        if (*qtd > 0) *qtd = 0; 
+        return;
+    }
+
     if (carta == 1) {
         *head = atual->PtrProx;
         free(atual);
         *qtd=*qtd-1;
         return;
     }
-    for (int i = 1; i < carta && atual != NULL; i++) {
-        anterior = atual;
-        atual = atual->PtrProx;
-    }
-    anterior->PtrProx = atual->PtrProx;
-    free(atual);
-    *qtd=*qtd-1;
+    // ... (o resto da função para carta != 1)
 }
 
 CARTA *listtoarray(NO_BARALHO *baralho, int *qtd){
@@ -88,9 +90,21 @@ CARTA PuxarCarta(NO_BARALHO **baralho,int *qtd){
 }
 
 void RecarregaBaralho(NO_BARALHO **baralho,CARTA *array,int *qtdatual,int qtdtotal){
-    while(*qtdatual>0){
-        RetiraCarta(1,baralho,qtdatual);
-    } 
-    CriaBaralho(array,baralho,qtdtotal,qtdatual);
-    Embaralhar(baralho);
+    // NOVO BLOCO: Limpeza direta e segura da lista
+    NO_BARALHO *atual = *baralho;
+    NO_BARALHO *proximo = NULL;
+
+    while (atual != NULL) {
+        proximo = atual->PtrProx; // Salva o próximo antes de liberar o atual
+        free(atual);              // Libera a memória
+        atual = proximo;          // Avança
+    }
+    *baralho = NULL; // Garantir que a cabeça está NULL (lista vazia)
+    *qtdatual = 0;   // Garantir que a contagem está zerada
+
+    // Antigo while(*qtdatual > 0) { RetiraCarta(1, baralho, qtdatual); } foi removido.
+    
+    // FASE 2: Recriação
+   CriaBaralho(array,baralho,qtdtotal,qtdatual);
+   Embaralhar(baralho);
 }

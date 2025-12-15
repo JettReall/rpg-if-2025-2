@@ -5,7 +5,9 @@
 #include <stdlib.h>
 #include "structs.h"
 #include "baralho.h"
+#include "cartas.h"
 #include "inimigos.h"
+#include "xp.h"
 
 CARTA fis1={"fisico1 teste","",ATAQUEFIS,8};
 CARTA mag1={"magico1 teste","",ATAQUEMAG,8};
@@ -16,7 +18,7 @@ DADOS_BATALHA dadosbaralho={
     .QtdCartaAtual = TAMANHO_DECK,
     .QtdCartamaoatual = 0,
     };
-int FlagBatalha = 0;
+
 int PilhaDeCompra = 0;
 
 
@@ -358,30 +360,33 @@ int batalha(NO_BARALHO **baralho,CARTA *baralhoarr,PERSONAGEM player,INIMIGOS in
     return player.HpAtual;
 }
 
-int main(){
+int Combate(/*nt baralhoarr[],*/INIMIGOS InimigosEmSala[],PERSONAGEM *Atacante){ //main
     srand(time(NULL));
 //    printf("Entrou no main\n");
-    PERSONAGEM player = {
-    "personagem demo",        // Nome
-    {200, 5, 5, 10, 10, 10, 1}, // Stat[7]
-    200,                      // HpAtual
-    0                         // Xp
-    };
 
 //    printf("declarou personagem\n");
-    inimigo[0] = CatalogoVento[BOSS];
     //inimigo[1] = CatalogoVento[3];
     //INIMIGOS *inimigosc[4]={&inimigo[0],&inimigo[1],&inimigo[2],&inimigo[3]};
 //    printf("declarou inimigos\n");
     NO_BARALHO *baralho=NULL;
 //    printf("criou a head\n");
-    CARTA baralhoarr[8]={fis1,fis1,fis1,mag1,mag1,mag1,cura1,cura1};
+    CARTA baralhoarr[TAMANHO_DECK] = {
+       CatalogoCartas[0][0][0],CatalogoCartas[0][0][1],
+       CatalogoCartas[0][0][0],CatalogoCartas[1][0][1],
+       CatalogoCartas[1][1][0],CatalogoCartas[0][1][1],
+       CatalogoCartas[0][2][0],CatalogoCartas[1][2][1],
+       CatalogoCartas[0][0][0],CatalogoCartas[1][0][1],
+       CatalogoCartas[1][1][0],CatalogoCartas[0][1][1],
+    };
     printf("\n");//PRINTF LENDARIO
     CriaBaralho(baralhoarr,&baralho, dadosbaralho.QtdCartaTotal,&dadosbaralho.QtdCartaAtual);
     Embaralhar(&baralho);
 //    PrintBaralho(baralho);
 //    printf("Criou baralho\n");
     PilhaDeCompra = dadosbaralho.QtdCartaTotal;
-    player.HpAtual=batalha(&baralho,baralhoarr,player,inimigo);
-    printf("A batalha acabou e %s esta com %d/%d de vida",player.Nome, player.HpAtual, player.Stat[HPMAX]);
+    Atacante->HpAtual=batalha(&baralho,baralhoarr,*Atacante,InimigosEmSala);
+    printf("A batalha acabou e %s esta com %d/%d de vida\n",Atacante->Nome, Atacante->HpAtual, Atacante->Stat[HPMAX]);
+    Atacante->Xp += Entregar_XP(InimigosEmSala);
+    Upar_Nivel(Atacante);
+
 }
