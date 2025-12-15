@@ -94,9 +94,9 @@ void EscolheClasse()
 void PreencherPadrao(int *ClsEscolhida) {
     CARTA *DeckInicial[TAMANHO_DECK] = {
        &CatalogoCartas[0][0][0],&CatalogoCartas[0][0][1],
-       &CatalogoCartas[0][0][0],&CatalogoCartas[0][0][1],
-       &CatalogoCartas[0][1][0],&CatalogoCartas[0][1][1],
-       &CatalogoCartas[0][2][0],&CatalogoCartas[0][2][1],
+       &CatalogoCartas[0][0][0],&CatalogoCartas[1][0][1],
+       &CatalogoCartas[1][1][0],&CatalogoCartas[0][1][1],
+       &CatalogoCartas[0][2][0],&CatalogoCartas[1][2][1],
     };
     
 
