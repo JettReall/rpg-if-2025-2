@@ -12,6 +12,13 @@
 #define LINHAS 6
 #define COLUNAS 6
 #define TOTAL_SALAS (LINHAS * COLUNAS)
+#define COMPRA_POR_TURNO 2
+#define TAMANHO_DECK 8
+#define ALERTA_FIM_DE_PILHA 3
+#define MAX_CLASSES 3
+#define MAX_STATS 6
+#define MAX_TIPO_CARTA 3
+#define CARTAS_CADA_CAT 2
 
 #define ITEM_VAZIO {"\0","\0",{0},0}
 

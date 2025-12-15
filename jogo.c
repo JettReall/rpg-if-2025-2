@@ -3,24 +3,36 @@
 //#include "criardungeons.h"
 #include "jogo.h"
 #include "structs.h"
-// #include "combate.h"
 #include "classes.h"
+#include "cartas.h"
+
 
 int Dificuldade_Jogo = FACIL;
 int Classe;
 
+SAVE_DADOS SaveSlot;
+PERSONAGEM Jogador;
+DADOS_BATALHA dadosbaralho={
+    .QtdCartaTotal = TAMANHO_DECK,
+    .QtdCartaAtual = TAMANHO_DECK,
+    .QtdCartamaoatual = 0,
+    };
+
 void Iniciar()
 {
     Menu();
-    Comeca_Jogo();
+    //
+    printf("%s\n%d\n%d\n",Jogador.Nome,Jogador.Classe,Jogador.HpAtual);
+    for (int i = 0; i < TAMANHO_DECK; i++) {
+        printf("%s\n",SaveSlot.Cartas[i].Nome);
+    }
+    //
 }
 
-void Menu()
-{
+void Menu() {
     int Opcoes = DIFICULDADE;
-    while (Opcoes == DIFICULDADE)
-    {
-        printf("Bem vindo ao mundo de ____\n");
+    while (Opcoes == DIFICULDADE) {
+        printf("A camminhada do Herói\n");
         printf("(0) Carregar Jogo \t(1) Jogar \t(2) Dificuldade \n");
         scanf("%d", &Opcoes);
         switch (Opcoes)
@@ -30,9 +42,10 @@ void Menu()
             break;
         case JOGAR:
             EscolheClasse();
+            Historia_Comeco_Jogo();
             break;
         case DIFICULDADE:
-            Dificuldade_Jogo = Escolhedificuldade();
+            SaveSlot.Dificuldade = Escolhedificuldade();
             break;
         default:
             printf("Opcao Invalida. Escolha uma Opcao Valida");
@@ -40,11 +53,10 @@ void Menu()
         }
     }
 }
-int Escolhedificuldade()
-{
+
+int Escolhedificuldade() {
     int x = 0;
-    while (1)
-    {
+    while (1) {
         printf("\n Qual a dificuldade do jogo? \n (1) Facil \t (2) Medio \t (3) Dificil \n");
         scanf("%d", &x);
         if (x >= FACIL && x <= DIFICIL) return x;
@@ -62,26 +74,39 @@ void EscolheClasse()
     int classe = -1;
     char nome[30];
     printf("\n Digite o nome do seu personagem: ");
-    scanf("%s", &nome);
+    scanf("%s", &Jogador.Nome);
     while (classe < GUERREIRO || classe > SACERDOTE)
     {
         printf("\n Escolha uma das 3 Classes: \n (0) Guerreiro \t (1) Mago \t(2) Sacerdote \n");
         scanf("%d", &classe);
-        switch (classe)
-        {
+        switch (classe) {
         case GUERREIRO:
-            Cria_Guerreiro(nome);
-            break;
         case MAGO:
-            Cria_Mago(nome);
-            break;
         case SACERDOTE:
-            Cria_Sacerdote(nome);
+            PreencherPadrao(&classe);
             break;
         default:
             printf("Escolha uma classe valida.\n");
             break;
         }
+    }
+}
+void PreencherPadrao(int *ClsEscolhida) {
+    CARTA *DeckInicial[TAMANHO_DECK] = {
+       &CatalogoCartas[0][0][0],&CatalogoCartas[0][0][1],
+       &CatalogoCartas[0][0][0],&CatalogoCartas[0][0][1],
+       &CatalogoCartas[0][1][0],&CatalogoCartas[0][1][1],
+       &CatalogoCartas[0][2][0],&CatalogoCartas[0][2][1],
+    };
+    
+
+    for (int i = 0; i < MAX_STATS; i++) {
+        Jogador.Stat[i] = DadosClasses[*ClsEscolhida].Stat[i];
+    }
+    Jogador.HpAtual = DadosClasses[*ClsEscolhida].HpAtual;
+    Jogador.Classe = DadosClasses[*ClsEscolhida].Classe;
+    for (int i = 0; i < dadosbaralho.QtdCartaTotal;i++) {
+        SaveSlot.Cartas[i] = *DeckInicial[i];
     }
 }
 
@@ -91,7 +116,7 @@ void AperteBotaoParaPular() {
     scanf("%d",&Pular);
 }
 
-void Comeca_Jogo()
+void Historia_Comeco_Jogo()
 {
     printf("É mais um dia normal no campus, o sol está se pondo e pediram para você desmntar um computador do LAZIC\n");
     printf("Você está no corredor do bloco 3, se dirigindo ao laboratório.\n");
@@ -117,4 +142,8 @@ void Comeca_Jogo()
 int main()
 {
     Iniciar();
+
+    //Cidade();
+
+    return 0;
 }

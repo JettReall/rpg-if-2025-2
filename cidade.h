@@ -96,6 +96,7 @@ int OpcoesLocal(int Local);
 void InicializarCidade();
 void TrocarDeLugar(int ID_Atual);
 void EntrarDungeon();
+int Cidade();
 extern int ExplorarDungeon(int Escolhida);
 
 void OpcoesCasa(int Selecionada);

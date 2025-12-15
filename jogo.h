@@ -7,5 +7,7 @@ void Menu();
 int Escolhedificuldade();
 void TestaSave();
 void EscolheClasse();
-void Comeca_Jogo();
+void Historia_Comeco_Jogo();
 void AperteBotaoParaPular();
+void PreencherPadrao(int *ClsEscolhida);
+extern int Cidade();

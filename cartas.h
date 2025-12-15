@@ -3,17 +3,12 @@
 
 #include "structs.h"
 
+
+extern CARTA CatalogoCartas[DIFICULDADES][MAX_TIPO_CARTA][CARTAS_CADA_CAT];
 /*
- [CLASSE][FORCA]
- CLASSE:
-   0 = Físico
-   1 = Mágico
-   2 = Cura
- FORÇA:
-   0 = Fraco
-   1 = Médio
-   2 = Forte
+[Dif][TipoCarta][Cartas normais]
+
+[0][1][1] = Dificuldade fácil, carta de ataque mágico, Segunda carta dessa lista 
 */
-extern CARTA CatalogoCartas[3][3];
 
 #endif

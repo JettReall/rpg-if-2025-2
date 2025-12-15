@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include "cidade.h"
 
-int main() {
+int Cidade() {
      InicializarCidade();
-     LocalAtual = &Locais[CASA]; //Ponto de inicio de andar na cidade
+      //Ponto de inicio de andar na cidade
      while(Loop) {
           printf("%s\n",LocalAtual->DadosLocal.DescricaoLocal);
           OpcoesDeCadaLocal[LocalAtual->DadosLocal.ID](OpcoesLocal(LocalAtual->DadosLocal.ID)); //Ponteiro de função que acessa função referente ao local, imprime o que tem de lá e escolhe 
@@ -35,7 +35,7 @@ void InicializarCidade() {
                }   
           }
      }
-
+     LocalAtual = &Locais[CASA];
 }
 
 

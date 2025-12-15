@@ -95,12 +95,6 @@ typedef struct NO_BARALHO{ //baralho eh uma lista encadeada
     struct NO_BARALHO *PtrProx;
 }NO_BARALHO;
 
-typedef struct{
-    int UltimoSavepoint;
-    CARTA Cartas[100];
-    int Dificuldade; 
-    int Dinheiro;
-}SAVE_DADOS;
 
 typedef struct{
     int QtdCartaAtual;
@@ -112,7 +106,16 @@ typedef struct {
     char Nome[50];//nome
     int Stat[7];//stats max
     int HpAtual,Xp;//hp atual e xp atual
+    int Classe;
 }PERSONAGEM;
+
+typedef struct{
+    PERSONAGEM DadosPlayer;
+    int UltimoSavepoint;
+    CARTA Cartas[100];
+    int Dificuldade; 
+    int Dinheiro;
+}SAVE_DADOS;
 
 typedef struct{
     char Nome[50];
