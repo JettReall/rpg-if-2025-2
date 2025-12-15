@@ -4,4 +4,4 @@
 #define modificador 5
 #define MAX_TAM_DESCRICAO 200
 #define MAX_HABILIDADES 2
-
+#define MAX_STATUS 7

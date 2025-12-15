@@ -72,6 +72,14 @@ typedef enum {
     MAGO,
     SACERDOTE
 }MenuClasses;
+
+typedef enum{
+    Nivel_1 = 1000,
+    Nivel_2 = 2000,
+    Nivel_3 = 4000,
+    Nivel_4 = 8000,
+}Niveis;
+
 //-------------------------------------------------------------------------------------------------------------------
 //structs:
 
@@ -109,7 +117,7 @@ typedef struct{
 typedef struct {
     char Nome[50];//nome
     int Stat[7];//stats max
-    int HpAtual,Xp;//hp atual e xp atual
+    int HpAtual, Xp, Classe;//hp atual e xp atual
 }PERSONAGEM;
 
 typedef struct{
